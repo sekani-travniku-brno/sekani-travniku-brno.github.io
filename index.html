@@ -909,6 +909,90 @@
       }
     }
 
+  
+    .contact-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(7, 16, 12, 0.55);
+      backdrop-filter: blur(6px);
+      z-index: 120;
+    }
+
+    .contact-modal.open {
+      display: flex;
+    }
+
+    .contact-modal-card {
+      width: min(100%, 460px);
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+      padding: 28px;
+      position: relative;
+      animation: messagePop .28s ease;
+    }
+
+    .contact-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface-2);
+      color: var(--text);
+      font: inherit;
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    .contact-modal-title {
+      margin-bottom: 8px;
+      padding-right: 54px;
+    }
+
+    .contact-modal-text {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .contact-modal-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-modal-item {
+      display: block;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+
+    .contact-modal-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .contact-modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .contact-modal-actions .btn {
+      flex: 1 1 180px;
+    }
+
   </style>
 </head>
 <body>
@@ -1033,7 +1117,7 @@
 
         <div class="actions reveal reveal-delay-4">
           <a class="btn btn-primary hero-glow" href="#kontakt" data-i18n="ctaPrimary">Nezávazně poptat</a>
-          <a class="btn btn-secondary" href="tel:+420123456789" data-i18n="ctaSecondary">Zavolat hned</a>
+          <button class="btn btn-secondary" id="callNowBtn" type="button" data-i18n="ctaSecondary">Zavolat hned</button>
         </div>
 
         <div class="stats reveal reveal-delay-4">
@@ -1288,6 +1372,31 @@
     </section>
   </main>
 
+  
+  <div id="contactModal" class="contact-modal" aria-hidden="true">
+    <div class="contact-modal-card" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+      <button id="contactModalClose" class="contact-modal-close" type="button" aria-label="Zavřít">×</button>
+      <div class="eyebrow" data-i18n="modalEyebrow">Kontakt</div>
+      <h3 id="contactModalTitle" class="contact-modal-title" data-i18n="modalTitle">Ozvěte se nám</h3>
+      <p class="contact-modal-text" data-i18n="modalText">Vyberte si, jestli chcete zavolat nebo napsat e-mail.</p>
+      <div class="contact-modal-list">
+        <a class="contact-modal-item" href="tel:+420733454089">
+          <strong data-i18n="modalPhoneLabel">Telefon</strong>
+          <span>+420 733 454 089</span>
+        </a>
+        <a class="contact-modal-item" href="mailto:sekanitravnikubrno@gmail.com">
+          <strong data-i18n="modalEmailLabel">E-mail</strong>
+          <span>sekanitravnikubrno@gmail.com</span>
+        </a>
+      </div>
+      <div class="contact-modal-actions">
+        <a class="btn btn-primary" href="tel:+420733454089" data-i18n="modalCallBtn">Zavolat</a>
+        <a class="btn btn-secondary" href="mailto:sekanitravnikubrno@gmail.com" data-i18n="modalEmailBtn">Napsat e-mail</a>
+      </div>
+    </div>
+  </div>
+
+
   <footer>
     <div class="container footer-inner">
       <div>
@@ -1372,7 +1481,14 @@
         minPaymentValue: "NEOMEZENO",
         transportTitle: "Doprava na místo",
         transportValue: "0 Kč",
-        footerVat: "Nejsem plátce DPH.",
+                modalEyebrow: "Kontakt",
+        modalTitle: "Ozvěte se nám",
+        modalText: "Vyberte si, jestli chcete zavolat nebo napsat e-mail.",
+        modalPhoneLabel: "Telefon",
+        modalEmailLabel: "E-mail",
+        modalCallBtn: "Zavolat",
+        modalEmailBtn: "Napsat e-mail",
+footerVat: "Nejsem plátce DPH.",
 
         footer1: "© 2026 Sekání trávníků Brno. Všechna práva vyhrazena.",
         footer2: "Profesionální údržba zeleně pro Brno a okolí.",
@@ -1458,7 +1574,14 @@
         minPaymentValue: "NEOBMEDZENE",
         transportTitle: "Doprava na miesto",
         transportValue: "0 Kč",
-        footerVat: "Nie som platca DPH.",
+                modalEyebrow: "Kontakt",
+        modalTitle: "Ozvite sa nám",
+        modalText: "Vyberte si, či chcete zavolať alebo napísať e-mail.",
+        modalPhoneLabel: "Telefón",
+        modalEmailLabel: "E-mail",
+        modalCallBtn: "Zavolať",
+        modalEmailBtn: "Napísať e-mail",
+footerVat: "Nie som platca DPH.",
 
         footer1: "© 2026 Kosenie trávnikov Brno. Všetky práva vyhradené.",
         footer2: "Profesionálna údržba zelene pre Brno a okolie.",
@@ -1544,7 +1667,14 @@
         minPaymentValue: "UNLIMITED",
         transportTitle: "Travel to location",
         transportValue: "0 CZK",
-        footerVat: "I am not a VAT payer.",
+                modalEyebrow: "Contact",
+        modalTitle: "Get in touch",
+        modalText: "Choose whether you want to call or send an email.",
+        modalPhoneLabel: "Phone",
+        modalEmailLabel: "Email",
+        modalCallBtn: "Call now",
+        modalEmailBtn: "Send email",
+footerVat: "I am not a VAT payer.",
 
         footer1: "© 2026 Brno Lawn Mowing. All rights reserved.",
         footer2: "Professional green space maintenance for Brno and nearby areas.",
@@ -1630,7 +1760,14 @@
         minPaymentValue: "UNBEGRENZT",
         transportTitle: "Anfahrt",
         transportValue: "0 CZK",
-        footerVat: "Ich bin kein MwSt.-Zahler.",
+                modalEyebrow: "Kontakt",
+        modalTitle: "Melden Sie sich bei uns",
+        modalText: "Wählen Sie, ob Sie anrufen oder eine E-Mail schreiben möchten.",
+        modalPhoneLabel: "Telefon",
+        modalEmailLabel: "E-Mail",
+        modalCallBtn: "Anrufen",
+        modalEmailBtn: "E-Mail schreiben",
+footerVat: "Ich bin kein MwSt.-Zahler.",
 
         footer1: "© 2026 Rasenmähen Brünn. Alle Rechte vorbehalten.",
         footer2: "Professionelle Grünflächenpflege für Brünn und Umgebung.",
@@ -1716,7 +1853,14 @@
         minPaymentValue: "БЕЗ ОГРАНИЧЕНИЙ",
         transportTitle: "Выезд на место",
         transportValue: "0 Kč",
-        footerVat: "Я не являюсь плательщиком НДС.",
+                modalEyebrow: "Контакт",
+        modalTitle: "Свяжитесь с нами",
+        modalText: "Выберите, хотите ли вы позвонить или написать e-mail.",
+        modalPhoneLabel: "Телефон",
+        modalEmailLabel: "E-mail",
+        modalCallBtn: "Позвонить",
+        modalEmailBtn: "Написать e-mail",
+footerVat: "Я не являюсь плательщиком НДС.",
 
         footer1: "© 2026 Стрижка газонов Брно. Все права защищены.",
         footer2: "Профессиональный уход за зелеными территориями в Брно и окрестностях.",
@@ -1802,7 +1946,14 @@
         minPaymentValue: "BEZ OGRANICZEŃ",
         transportTitle: "Dojazd na miejsce",
         transportValue: "0 Kč",
-        footerVat: "Nie jestem płatnikiem VAT.",
+                modalEyebrow: "Kontakt",
+        modalTitle: "Skontaktuj się z nami",
+        modalText: "Wybierz, czy chcesz zadzwonić, czy napisać e-mail.",
+        modalPhoneLabel: "Telefon",
+        modalEmailLabel: "E-mail",
+        modalCallBtn: "Zadzwoń",
+        modalEmailBtn: "Napisz e-mail",
+footerVat: "Nie jestem płatnikiem VAT.",
 
         footer1: "© 2026 Koszenie trawników Brno. Wszelkie prawa zastrzeżone.",
         footer2: "Profesjonalna pielęgnacja terenów zielonych w Brnie i okolicy.",
@@ -1831,6 +1982,9 @@
     const errorBox = document.getElementById('errorBox');
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
+    const callNowBtn = document.getElementById('callNowBtn');
+    const contactModal = document.getElementById('contactModal');
+    const contactModalClose = document.getElementById('contactModalClose');
 
 
     const languageNames = {
@@ -1856,7 +2010,20 @@
       languageToggle.setAttribute('aria-expanded', 'false');
     }
 
-    function getSystemTheme() {
+    
+    function openContactModal() {
+      contactModal.classList.add('open');
+      contactModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeContactModal() {
+      contactModal.classList.remove('open');
+      contactModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+function getSystemTheme() {
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
@@ -1910,7 +2077,21 @@
       applyLanguage(savedLang);
     }
 
-    themeToggle.addEventListener('click', () => {
+    
+    callNowBtn.addEventListener('click', openContactModal);
+    contactModalClose.addEventListener('click', closeContactModal);
+
+    contactModal.addEventListener('click', (event) => {
+      if (event.target === contactModal) closeContactModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && contactModal.classList.contains('open')) {
+        closeContactModal();
+      }
+    });
+
+themeToggle.addEventListener('click', () => {
       const current = root.getAttribute('data-theme') || 'light';
       applyTheme(current === 'dark' ? 'light' : 'dark');
     });
