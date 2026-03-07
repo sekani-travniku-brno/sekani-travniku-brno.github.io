@@ -919,6 +919,12 @@
     </symbol>
     <symbol id="flag-sk" viewBox="0 0 24 16">
       <rect width="24" height="5.33" fill="#fff"/><rect y="5.33" width="24" height="5.33" fill="#0b4ea2"/><rect y="10.66" width="24" height="5.34" fill="#ee1c25"/>
+      <g transform="translate(5.2 4.1)">
+        <path d="M0.8 0h4.8c0.8 0 1.5 0.6 1.5 1.5v3.2c0 2.4-1.7 4.4-3.9 5C1.1 9.1 0 7.1 0 4.7V1.5C0 0.6 0.6 0 0.8 0z" fill="#fff"/>
+        <path d="M1.3 0.6h3.8c0.8 0 1.3 0.4 1.3 1.1v2.9c0 2-1.4 3.7-3.2 4.2-1.8-0.5-3.2-2.2-3.2-4.2V1.7c0-0.7 0.6-1.1 1.3-1.1z" fill="#d7141a"/>
+        <path d="M3.2 1.5v4.9M1.6 3.9h3.2" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M2.1 6.2c0.4-0.8 1-1.2 1.1-1.2 0.2 0 0.8 0.4 1.1 1.2" fill="none" stroke="#0b4ea2" stroke-width="0.7" stroke-linecap="round"/>
+      </g>
     </symbol>
     <symbol id="flag-en" viewBox="0 0 24 16">
       <rect width="24" height="16" fill="#012169"/>
@@ -1155,6 +1161,54 @@
       </div>
     </section>
 
+
+    <section>
+      <div class="container">
+        <div class="section-title reveal">
+          <div class="eyebrow" data-i18n="pricingEyebrow">Ceník</div>
+          <h2 data-i18n="pricingTitle">Jasné ceny bez překvapení</h2>
+          <p data-i18n="pricingText">
+            Orientační ceny jsou uvedené níže. U specifických zakázek připravíme individuální nabídku.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card reveal">
+            <h3 data-i18n="price1Title">Sečení trávy</h3>
+            <p><strong data-i18n="price1Value">2.5 Kč / m²</strong></p>
+          </article>
+
+          <article class="card reveal">
+            <h3 data-i18n="price2Title">Ztížené podmínky pro sekání</h3>
+            <p><strong data-i18n="price2Value">3 Kč / m²</strong></p>
+          </article>
+
+          <article class="card reveal">
+            <h3 data-i18n="price3Title">Ostatní práce</h3>
+            <p><strong data-i18n="price3Value">Dohodou</strong></p>
+          </article>
+        </div>
+
+        <div class="steps" style="margin-top:24px;">
+          <div class="step reveal">
+            <div class="step-number">✓</div>
+            <div>
+              <h3 data-i18n="minPaymentTitle">Minimální platba</h3>
+              <p data-i18n="minPaymentValue">NEOMEZENO</p>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-number">✓</div>
+            <div>
+              <h3 data-i18n="transportTitle">Doprava na místo</h3>
+              <p data-i18n="transportValue">0 Kč</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="cta">
       <div class="container">
         <div class="cta-box reveal">
@@ -1236,7 +1290,10 @@
 
   <footer>
     <div class="container footer-inner">
-      <div data-i18n="footer1">© 2026 Sekání trávníků Brno. Všechna práva vyhrazena.</div>
+      <div>
+        <div data-i18n="footer1">© 2026 Sekání trávníků Brno. Všechna práva vyhrazena.</div>
+        <div data-i18n="footerVat">Nejsem plátce DPH.</div>
+      </div>
       <div data-i18n="footer2">Profesionální údržba zeleně pro Brno a okolí.</div>
     </div>
   </footer>
@@ -1302,6 +1359,21 @@
         labelMessage: "Vlastní zpráva",
         submitBtn: "Odeslat poptávku",
         formNote: "Formulář je napojený na e-mail přes Web3Forms. Pro první zprovoznění vložte vlastní access key.",
+        pricingEyebrow: "Ceník",
+        pricingTitle: "Jasné ceny bez překvapení",
+        pricingText: "Orientační ceny jsou uvedené níže. U specifických zakázek připravíme individuální nabídku.",
+        price1Title: "Sečení trávy",
+        price1Value: "2.5 Kč / m²",
+        price2Title: "Ztížené podmínky pro sekání",
+        price2Value: "3 Kč / m²",
+        price3Title: "Ostatní práce",
+        price3Value: "Dohodou",
+        minPaymentTitle: "Minimální platba",
+        minPaymentValue: "NEOMEZENO",
+        transportTitle: "Doprava na místo",
+        transportValue: "0 Kč",
+        footerVat: "Nejsem plátce DPH.",
+
         footer1: "© 2026 Sekání trávníků Brno. Všechna práva vyhrazena.",
         footer2: "Profesionální údržba zeleně pro Brno a okolí.",
         themeLight: "Světlý režim",
@@ -1373,6 +1445,21 @@
         labelMessage: "Vlastná správa",
         submitBtn: "Odoslať dopyt",
         formNote: "Formulár je napojený na e-mail cez Web3Forms. Na prvé spustenie vložte vlastný access key.",
+        pricingEyebrow: "Cenník",
+        pricingTitle: "Jasné ceny bez prekvapení",
+        pricingText: "Orientačné ceny sú uvedené nižšie. Pri špecifických zákazkách pripravíme individuálnu ponuku.",
+        price1Title: "Kosenie trávy",
+        price1Value: "2.5 Kč / m²",
+        price2Title: "Sťažené podmienky na kosenie",
+        price2Value: "3 Kč / m²",
+        price3Title: "Ostatné práce",
+        price3Value: "Dohodou",
+        minPaymentTitle: "Minimálna platba",
+        minPaymentValue: "NEOBMEDZENE",
+        transportTitle: "Doprava na miesto",
+        transportValue: "0 Kč",
+        footerVat: "Nie som platca DPH.",
+
         footer1: "© 2026 Kosenie trávnikov Brno. Všetky práva vyhradené.",
         footer2: "Profesionálna údržba zelene pre Brno a okolie.",
         themeLight: "Svetlý režim",
@@ -1444,6 +1531,21 @@
         labelMessage: "Your message",
         submitBtn: "Send inquiry",
         formNote: "This form is connected to email via Web3Forms. Insert your own access key to activate it.",
+        pricingEyebrow: "Pricing",
+        pricingTitle: "Clear prices without surprises",
+        pricingText: "Indicative prices are listed below. For specific jobs, we will prepare an individual quote.",
+        price1Title: "Grass mowing",
+        price1Value: "2.5 CZK / m²",
+        price2Title: "Difficult mowing conditions",
+        price2Value: "3 CZK / m²",
+        price3Title: "Other work",
+        price3Value: "By agreement",
+        minPaymentTitle: "Minimum payment",
+        minPaymentValue: "UNLIMITED",
+        transportTitle: "Travel to location",
+        transportValue: "0 CZK",
+        footerVat: "I am not a VAT payer.",
+
         footer1: "© 2026 Brno Lawn Mowing. All rights reserved.",
         footer2: "Professional green space maintenance for Brno and nearby areas.",
         themeLight: "Light mode",
@@ -1515,6 +1617,21 @@
         labelMessage: "Nachricht",
         submitBtn: "Anfrage senden",
         formNote: "Dieses Formular ist per Web3Forms mit E-Mail verbunden. Fügen Sie Ihren eigenen Access Key ein, um es zu aktivieren.",
+        pricingEyebrow: "Preisliste",
+        pricingTitle: "Klare Preise ohne Überraschungen",
+        pricingText: "Die Richtpreise finden Sie unten. Für spezielle Aufträge erstellen wir ein individuelles Angebot.",
+        price1Title: "Rasenmähen",
+        price1Value: "2.5 CZK / m²",
+        price2Title: "Erschwerte Mähbedingungen",
+        price2Value: "3 CZK / m²",
+        price3Title: "Sonstige Arbeiten",
+        price3Value: "Nach Vereinbarung",
+        minPaymentTitle: "Mindestzahlung",
+        minPaymentValue: "UNBEGRENZT",
+        transportTitle: "Anfahrt",
+        transportValue: "0 CZK",
+        footerVat: "Ich bin kein MwSt.-Zahler.",
+
         footer1: "© 2026 Rasenmähen Brünn. Alle Rechte vorbehalten.",
         footer2: "Professionelle Grünflächenpflege für Brünn und Umgebung.",
         themeLight: "Heller Modus",
@@ -1586,6 +1703,21 @@
         labelMessage: "Ваше сообщение",
         submitBtn: "Отправить заявку",
         formNote: "Форма подключена к e-mail через Web3Forms. Для запуска вставьте свой access key.",
+        pricingEyebrow: "Прайс-лист",
+        pricingTitle: "Понятные цены без сюрпризов",
+        pricingText: "Ориентировочные цены указаны ниже. Для особых заказов подготовим индивидуальное предложение.",
+        price1Title: "Покос травы",
+        price1Value: "2.5 Kč / м²",
+        price2Title: "Сложные условия для покоса",
+        price2Value: "3 Kč / м²",
+        price3Title: "Другие работы",
+        price3Value: "По договоренности",
+        minPaymentTitle: "Минимальная оплата",
+        minPaymentValue: "БЕЗ ОГРАНИЧЕНИЙ",
+        transportTitle: "Выезд на место",
+        transportValue: "0 Kč",
+        footerVat: "Я не являюсь плательщиком НДС.",
+
         footer1: "© 2026 Стрижка газонов Брно. Все права защищены.",
         footer2: "Профессиональный уход за зелеными территориями в Брно и окрестностях.",
         themeLight: "Светлая тема",
@@ -1657,6 +1789,21 @@
         labelMessage: "Własna wiadomość",
         submitBtn: "Wyślij zapytanie",
         formNote: "Formularz jest podłączony do e-maila przez Web3Forms. Aby go uruchomić, wstaw własny access key.",
+        pricingEyebrow: "Cennik",
+        pricingTitle: "Jasne ceny bez niespodzianek",
+        pricingText: "Orientacyjne ceny podano poniżej. Dla specyficznych zleceń przygotujemy indywidualną ofertę.",
+        price1Title: "Koszenie trawy",
+        price1Value: "2.5 Kč / m²",
+        price2Title: "Utrudnione warunki koszenia",
+        price2Value: "3 Kč / m²",
+        price3Title: "Pozostałe prace",
+        price3Value: "Do uzgodnienia",
+        minPaymentTitle: "Minimalna płatność",
+        minPaymentValue: "BEZ OGRANICZEŃ",
+        transportTitle: "Dojazd na miejsce",
+        transportValue: "0 Kč",
+        footerVat: "Nie jestem płatnikiem VAT.",
+
         footer1: "© 2026 Koszenie trawników Brno. Wszelkie prawa zastrzeżone.",
         footer2: "Profesjonalna pielęgnacja terenów zielonych w Brnie i okolicy.",
         themeLight: "Tryb jasny",
