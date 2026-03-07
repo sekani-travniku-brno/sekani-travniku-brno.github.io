@@ -104,6 +104,35 @@
       font-weight: 700;
     }
 
+    .icon-inline,
+    .theme-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .icon-inline svg,
+    .theme-icon svg {
+      display: block;
+    }
+
+    .theme-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .theme-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .language-menu {
       position: relative;
     }
@@ -352,6 +381,18 @@
       color: var(--text);
     }
 
+    .hero-list-item .icon-inline {
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      color: var(--green);
+    }
+
+    .hero-list-item .icon-inline svg {
+      width: 20px;
+      height: 20px;
+    }
+
     section {
       padding: 88px 0;
     }
@@ -387,9 +428,18 @@
       transition: background .25s ease, color .25s ease;
     }
 
+    
     .card .icon {
-      font-size: 2.2rem;
+      width: 44px;
+      height: 44px;
+      color: var(--green);
       margin-bottom: 14px;
+    }
+
+    .card .icon svg {
+      width: 44px;
+      height: 44px;
+      display: block;
     }
 
     .card h3 {
@@ -643,6 +693,222 @@
       .control-btn, .language-menu, .language-toggle { width: 100%; }
       .language-dropdown { position: static; min-width: 100%; margin-top: 8px; }
     }
+  
+    /* Enhanced interactions */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(124, 207, 76, 0.10), transparent 26%),
+        radial-gradient(circle at 88% 14%, rgba(255, 243, 163, 0.09), transparent 20%),
+        radial-gradient(circle at 50% 100%, rgba(21, 115, 71, 0.05), transparent 32%);
+      z-index: -1;
+    }
+
+    .topbar.scrolled {
+      box-shadow: 0 10px 32px rgba(16, 35, 27, 0.10);
+    }
+
+    .hero::before {
+      animation: blobFloatOne 10s ease-in-out infinite;
+    }
+
+    .hero::after {
+      animation: blobFloatTwo 12s ease-in-out infinite;
+    }
+
+    .badge,
+    .hero-card,
+    .stat,
+    .card,
+    .step,
+    .coverage,
+    .mini-panel,
+    .contact-card,
+    .chip,
+    .control-btn,
+    .language-toggle,
+    .language-dropdown {
+      transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease,
+        background .28s ease,
+        color .28s ease,
+        opacity .28s ease;
+    }
+
+    .hero-card {
+      animation: floatCard 5.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .badge {
+      animation: pulseGlow 3.8s ease-in-out infinite;
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-125%);
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,.32) 50%, transparent 80%);
+      transition: transform .7s ease;
+    }
+
+    .btn:hover::after {
+      transform: translateX(125%);
+    }
+
+    .btn-primary {
+      box-shadow: 0 16px 34px rgba(11,61,46,0.18);
+    }
+
+    .btn-primary.hero-glow {
+      animation: ctaPulse 2.8s ease-in-out infinite;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(16, 35, 27, 0.13);
+      border-color: color-mix(in srgb, var(--green) 30%, var(--border));
+    }
+
+    .cards .card:hover .icon {
+      transform: scale(1.08);
+    }
+
+    .topbar .brand {
+      transition: transform .22s ease, opacity .22s ease;
+    }
+
+    .topbar .brand:hover {
+      transform: translateY(-1px);
+      opacity: .92;
+    }
+
+    .language-option {
+      transition: background .22s ease, transform .22s ease;
+    }
+
+    .language-option:hover {
+      transform: translateX(4px);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.reveal-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal.reveal-delay-1 { transition-delay: .08s; }
+    .reveal.reveal-delay-2 { transition-delay: .16s; }
+    .reveal.reveal-delay-3 { transition-delay: .24s; }
+    .reveal.reveal-delay-4 { transition-delay: .32s; }
+
+    .tilt-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .section-accent {
+      position: relative;
+    }
+
+    .section-accent::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: -10px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(124, 207, 76, .18), transparent 70%);
+      pointer-events: none;
+      filter: blur(8px);
+      opacity: .9;
+    }
+
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% 78% auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 207, 76, 0.20), transparent 65%);
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    .success-box.show,
+    .error-box.show {
+      animation: messagePop .35s ease;
+    }
+
+    @keyframes blobFloatOne {
+      0%, 100% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(-10px, 12px, 0) scale(1.05); }
+    }
+
+    @keyframes blobFloatTwo {
+      0%, 100% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(12px, -8px, 0) scale(1.06); }
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 rgba(255,255,255,0); }
+      50% { box-shadow: 0 0 0 10px rgba(255,255,255,0.04); }
+    }
+
+    @keyframes ctaPulse {
+      0%, 100% { transform: translateY(0); box-shadow: 0 16px 34px rgba(11,61,46,0.18); }
+      50% { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(11,61,46,0.24); }
+    }
+
+    @keyframes messagePop {
+      from { opacity: 0; transform: translateY(10px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -670,6 +936,39 @@
     <symbol id="flag-pl" viewBox="0 0 24 16">
       <rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#dc143c"/>
     </symbol>
+  
+    <symbol id="icon-theme-moon" viewBox="0 0 24 24">
+      <path d="M20 14.2A8.5 8.5 0 0 1 9.8 4a8.5 8.5 0 1 0 10.2 10.2Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-theme-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4.5" fill="currentColor"/>
+      <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <path d="M12 2.5v3"/><path d="M12 18.5v3"/><path d="M2.5 12h3"/><path d="M18.5 12h3"/>
+        <path d="M5.3 5.3l2.1 2.1"/><path d="M16.6 16.6l2.1 2.1"/><path d="M18.7 5.3l-2.1 2.1"/><path d="M7.4 16.6l-2.1 2.1"/>
+      </g>
+    </symbol>
+    <symbol id="icon-leaf" viewBox="0 0 24 24">
+      <path d="M12 21V9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M12 14c-3.8 0-6.8-2.8-7.4-6.8 4.3 0 7.2 2.1 7.9 5.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 11.8c.8-3.3 3.7-5.3 7.4-5.3-.5 3.9-3.4 6.7-7.4 6.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-scissors" viewBox="0 0 24 24">
+      <circle cx="7.2" cy="17.6" r="2.2" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <circle cx="15.8" cy="17.6" r="2.2" fill="none" stroke="currentColor" stroke-width="2.1"/>
+      <path d="M5.2 15.4h12.7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M9.8 15.4v-3.2c0-1.1.9-2 2-2h3.6c1.5 0 2.7 1.2 2.7 2.7v2.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M17.7 10.5 15.2 6.9" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M10.5 9.5h4.7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="M4.8 15.3 3.7 12.9" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-check-circle" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="currentColor"/>
+      <path d="m8 12.3 2.5 2.5L16.5 9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path d="m5 12.5 4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
   </svg>
 
   <div class="topbar">
@@ -711,7 +1010,7 @@
             </button>
           </div>
         </div>
-        <button id="themeToggle" class="control-btn" type="button">🌙 Tmavý režim</button>
+        <button id="themeToggle" class="control-btn" type="button"><span class="theme-label"><span id="themeIcon" class="theme-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-theme-moon"></use></svg></span><span id="themeText">Tmavý režim</span></span></button>
       </div>
     </div>
   </div>
@@ -719,19 +1018,19 @@
   <header class="hero">
     <div class="container hero-inner">
       <div>
-        <div class="badge" data-i18n="badge">Sekání trávníků • Brno a okolí</div>
-        <h1 data-i18n="heroTitle">Perfektně posekaný trávník bez starostí.</h1>
-        <p class="lead" data-i18n="heroLead">
+        <div class="badge reveal reveal-delay-1" data-i18n="badge">Sekání trávníků • Brno a okolí</div>
+        <h1 class="reveal reveal-delay-2" data-i18n="heroTitle">Perfektně posekaný trávník bez starostí.</h1>
+        <p class="lead reveal reveal-delay-3" data-i18n="heroLead">
           Profesionální sekání trávníku pro rodinné domy, firmy i pozemky v Brně a okolí. Rychlá domluva, spolehlivý termín a výsledek, který je hned vidět.
         </p>
-        <p class="slogan" data-i18n="slogan">Vaše tráva, naše radost!</p>
+        <p class="slogan reveal reveal-delay-3" data-i18n="slogan">Vaše tráva, naše radost!</p>
 
-        <div class="actions">
-          <a class="btn btn-primary" href="#kontakt" data-i18n="ctaPrimary">Nezávazně poptat</a>
+        <div class="actions reveal reveal-delay-4">
+          <a class="btn btn-primary hero-glow" href="#kontakt" data-i18n="ctaPrimary">Nezávazně poptat</a>
           <a class="btn btn-secondary" href="tel:+420123456789" data-i18n="ctaSecondary">Zavolat hned</a>
         </div>
 
-        <div class="stats">
+        <div class="stats reveal reveal-delay-4">
           <div class="stat">
             <strong>24 h</strong>
             <span data-i18n="stat1">rychlá reakce na poptávku</span>
@@ -747,7 +1046,7 @@
         </div>
       </div>
 
-      <div class="hero-card">
+      <div class="hero-card tilt-card reveal reveal-delay-2">
         <div class="hero-card-inner">
           <div class="eyebrow" data-i18n="whyUs">Proč právě my</div>
           <h2 data-i18n="heroCardTitle">Trávník, který dělá skvělý první dojem</h2>
@@ -756,10 +1055,10 @@
           </p>
 
           <div class="hero-list">
-            <div class="hero-list-item"><span>✔️</span><span data-i18n="benefit1">Působíme v Brně a širokém okolí</span></div>
-            <div class="hero-list-item"><span>✔️</span><span data-i18n="benefit2">Rychlá domluva a férová cena předem</span></div>
-            <div class="hero-list-item"><span>✔️</span><span data-i18n="benefit3">Vlastní technika pro malé i větší pozemky</span></div>
-            <div class="hero-list-item"><span>✔️</span><span data-i18n="benefit4">Spolehlivé termíny bez zbytečného čekání</span></div>
+            <div class="hero-list-item"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg></span><span data-i18n="benefit1">Působíme v Brně a širokém okolí</span></div>
+            <div class="hero-list-item"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg></span><span data-i18n="benefit2">Rychlá domluva a férová cena předem</span></div>
+            <div class="hero-list-item"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg></span><span data-i18n="benefit3">Vlastní technika pro malé i větší pozemky</span></div>
+            <div class="hero-list-item"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg></span><span data-i18n="benefit4">Spolehlivé termíny bez zbytečného čekání</span></div>
           </div>
         </div>
       </div>
@@ -769,7 +1068,7 @@
   <main>
     <section>
       <div class="container">
-        <div class="section-title">
+        <div class="section-title section-accent reveal">
           <div class="eyebrow" data-i18n="servicesEyebrow">Naše služby</div>
           <h2 data-i18n="servicesTitle">Postaráme se o každý typ trávníku</h2>
           <p data-i18n="servicesText">
@@ -778,20 +1077,20 @@
         </div>
 
         <div class="cards">
-          <article class="card">
-            <div class="icon">🌿</div>
+          <article class="card tilt-card reveal">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-leaf"></use></svg></div>
             <h3 data-i18n="service1Title">Pravidelné sekání</h3>
             <p data-i18n="service1Text">Udržujeme trávník krátký, hustý a upravený po celou sezónu. Ideální pro rodinné domy, firemní areály i bytové domy.</p>
           </article>
 
-          <article class="card">
-            <div class="icon">✂️</div>
+          <article class="card tilt-card reveal">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-scissors"></use></svg></div>
             <h3 data-i18n="service2Title">Jednorázový zásah</h3>
             <p data-i18n="service2Text">Přerostlá zahrada, chata po zimě nebo pozemek před prodejem? Přijedeme rychle a dáme vše do pořádku.</p>
           </article>
 
-          <article class="card">
-            <div class="icon">✅</div>
+          <article class="card tilt-card reveal">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check-circle"></use></svg></div>
             <h3 data-i18n="service3Title">Dosekání detailů</h3>
             <p data-i18n="service3Text">Začištění kolem obrubníků, stromů, plotů a chodníků pro opravdu profesionální výsledek bez kompromisů.</p>
           </article>
@@ -806,7 +1105,7 @@
           <h2 data-i18n="howTitle">Jednoduše, rychle a bez komplikací</h2>
 
           <div class="steps">
-            <div class="step">
+            <div class="step reveal">
               <div class="step-number">1</div>
               <div>
                 <h3 data-i18n="step1Title">Ozvete se nám</h3>
@@ -814,7 +1113,7 @@
               </div>
             </div>
 
-            <div class="step">
+            <div class="step reveal">
               <div class="step-number">2</div>
               <div>
                 <h3 data-i18n="step2Title">Navrhneme řešení</h3>
@@ -822,7 +1121,7 @@
               </div>
             </div>
 
-            <div class="step">
+            <div class="step reveal">
               <div class="step-number">3</div>
               <div>
                 <h3 data-i18n="step3Title">Posekáme a uklidíme</h3>
@@ -832,7 +1131,7 @@
           </div>
         </div>
 
-        <aside class="coverage">
+        <aside class="coverage tilt-card reveal reveal-delay-2">
           <div class="eyebrow" style="color:#c9f2d7;" data-i18n="whereEyebrow">Kde pracujeme</div>
           <h2 data-i18n="whereTitle">Brno a okolní města i obce</h2>
           <p data-i18n="whereText">
@@ -846,7 +1145,7 @@
             <span class="chip">Modřice</span>
           </div>
 
-          <div class="mini-panel">
+          <div class="mini-panel reveal reveal-delay-3">
             <h3 data-i18n="maintenanceTitle">Hodí se vám pravidelná údržba?</h3>
             <p data-i18n="maintenanceText">
               Nastavíme interval sekání podle růstu trávníku a typu pozemku. Nemusíte nic hlídat — jen si užívat upravenou zahradu.
@@ -858,7 +1157,7 @@
 
     <section class="cta">
       <div class="container">
-        <div class="cta-box">
+        <div class="cta-box reveal">
           <div class="cta-grid">
             <div>
               <div class="eyebrow" style="color:#e8ffe0;" data-i18n="contactEyebrow">Neztrácejte čas sekačkou</div>
@@ -868,7 +1167,7 @@
               </p>
             </div>
 
-            <div id="kontakt" class="contact-card">
+            <div id="kontakt" class="contact-card reveal reveal-delay-2">
               <h3 data-i18n="formTitle">Napište si o nezávaznou nabídku</h3>
               <p style="color:var(--muted);margin-bottom:18px;" data-i18n="formIntro">
                 Vyplňte krátký formulář a my se vám ozveme co nejdříve zpět.
@@ -1005,8 +1304,8 @@
         formNote: "Formulář je napojený na e-mail přes Web3Forms. Pro první zprovoznění vložte vlastní access key.",
         footer1: "© 2026 Sekání trávníků Brno. Všechna práva vyhrazena.",
         footer2: "Profesionální údržba zeleně pro Brno a okolí.",
-        themeLight: "☀️ Světlý režim",
-        themeDark: "🌙 Tmavý režim",
+        themeLight: "Světlý režim",
+        themeDark: "Tmavý režim",
         phFirstName: "Např. Jan",
         phLastName: "Např. Novák",
         phPhone: "+420 123 456 789",
@@ -1076,8 +1375,8 @@
         formNote: "Formulár je napojený na e-mail cez Web3Forms. Na prvé spustenie vložte vlastný access key.",
         footer1: "© 2026 Kosenie trávnikov Brno. Všetky práva vyhradené.",
         footer2: "Profesionálna údržba zelene pre Brno a okolie.",
-        themeLight: "☀️ Svetlý režim",
-        themeDark: "🌙 Tmavý režim",
+        themeLight: "Svetlý režim",
+        themeDark: "Tmavý režim",
         phFirstName: "Napr. Ján",
         phLastName: "Napr. Novák",
         phPhone: "+420 123 456 789",
@@ -1147,8 +1446,8 @@
         formNote: "This form is connected to email via Web3Forms. Insert your own access key to activate it.",
         footer1: "© 2026 Brno Lawn Mowing. All rights reserved.",
         footer2: "Professional green space maintenance for Brno and nearby areas.",
-        themeLight: "☀️ Light mode",
-        themeDark: "🌙 Dark mode",
+        themeLight: "Light mode",
+        themeDark: "Dark mode",
         phFirstName: "e.g. John",
         phLastName: "e.g. Smith",
         phPhone: "+420 123 456 789",
@@ -1218,8 +1517,8 @@
         formNote: "Dieses Formular ist per Web3Forms mit E-Mail verbunden. Fügen Sie Ihren eigenen Access Key ein, um es zu aktivieren.",
         footer1: "© 2026 Rasenmähen Brünn. Alle Rechte vorbehalten.",
         footer2: "Professionelle Grünflächenpflege für Brünn und Umgebung.",
-        themeLight: "☀️ Heller Modus",
-        themeDark: "🌙 Dunkler Modus",
+        themeLight: "Heller Modus",
+        themeDark: "Dunkler Modus",
         phFirstName: "z. B. Jan",
         phLastName: "z. B. Novak",
         phPhone: "+420 123 456 789",
@@ -1289,8 +1588,8 @@
         formNote: "Форма подключена к e-mail через Web3Forms. Для запуска вставьте свой access key.",
         footer1: "© 2026 Стрижка газонов Брно. Все права защищены.",
         footer2: "Профессиональный уход за зелеными территориями в Брно и окрестностях.",
-        themeLight: "☀️ Светлая тема",
-        themeDark: "🌙 Тёмная тема",
+        themeLight: "Светлая тема",
+        themeDark: "Тёмная тема",
         phFirstName: "Напр. Иван",
         phLastName: "Напр. Иванов",
         phPhone: "+420 123 456 789",
@@ -1360,8 +1659,8 @@
         formNote: "Formularz jest podłączony do e-maila przez Web3Forms. Aby go uruchomić, wstaw własny access key.",
         footer1: "© 2026 Koszenie trawników Brno. Wszelkie prawa zastrzeżone.",
         footer2: "Profesjonalna pielęgnacja terenów zielonych w Brnie i okolicy.",
-        themeLight: "☀️ Tryb jasny",
-        themeDark: "🌙 Tryb ciemny",
+        themeLight: "Tryb jasny",
+        themeDark: "Tryb ciemny",
         phFirstName: "Np. Jan",
         phLastName: "Np. Kowalski",
         phPhone: "+420 123 456 789",
@@ -1378,6 +1677,8 @@
     const currentLanguageIcon = document.getElementById('currentLanguageIcon');
     const languageOptions = document.querySelectorAll('.language-option');
     const themeToggle = document.getElementById('themeToggle');
+    const themeText = document.getElementById('themeText');
+    const themeIcon = document.getElementById('themeIcon');
     const root = document.documentElement;
     const successBox = document.getElementById('successBox');
     const errorBox = document.getElementById('errorBox');
@@ -1412,12 +1713,17 @@
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
+    function updateThemeButton(theme, t) {
+      themeText.textContent = theme === 'dark' ? t.themeLight : t.themeDark;
+      themeIcon.innerHTML = `<svg viewBox="0 0 24 24"><use href="${theme === 'dark' ? '#icon-theme-sun' : '#icon-theme-moon'}"></use></svg>`;
+    }
+
     function applyTheme(theme) {
       root.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
       const lang = localStorage.getItem('lang') || 'cs';
       const t = translations[lang] || translations.cs;
-      themeToggle.textContent = theme === 'dark' ? t.themeLight : t.themeDark;
+      updateThemeButton(theme, t);
     }
 
     function initTheme() {
@@ -1446,7 +1752,7 @@
       document.getElementById('zprava').placeholder = t.phMessage;
 
       const currentTheme = root.getAttribute('data-theme') || 'light';
-      themeToggle.textContent = currentTheme === 'dark' ? t.themeLight : t.themeDark;
+      updateThemeButton(currentTheme, t);
 
       localStorage.setItem('lang', lang);
       updateLanguageMenu(lang);
@@ -1518,8 +1824,55 @@
       }
     });
 
+
+    function initScrollEffects() {
+      const topbar = document.querySelector('.topbar');
+      const revealItems = document.querySelectorAll('.reveal');
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+
+      const handleTopbar = () => {
+        if (window.scrollY > 16) topbar.classList.add('scrolled');
+        else topbar.classList.remove('scrolled');
+      };
+
+      handleTopbar();
+      window.addEventListener('scroll', handleTopbar, { passive: true });
+
+      const tiltTargets = document.querySelectorAll('.tilt-card:not(.contact-card)');
+
+      const enableTilt = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (enableTilt) {
+        tiltTargets.forEach((card) => {
+          card.addEventListener('mousemove', (event) => {
+            if (window.innerWidth < 981) return;
+            const rect = card.getBoundingClientRect();
+            const px = (event.clientX - rect.left) / rect.width;
+            const py = (event.clientY - rect.top) / rect.height;
+            const rotateY = (px - 0.5) * 5;
+            const rotateX = (0.5 - py) * 5;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+          });
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+          });
+        });
+      }
+    }
+
     initTheme();
     initLanguage();
+    initScrollEffects();
   </script>
 </body>
 </html>
