@@ -104,6 +104,78 @@
       font-weight: 700;
     }
 
+    .language-menu {
+      position: relative;
+    }
+
+    .language-toggle {
+      min-width: 180px;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .language-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 220px;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .language-dropdown.open {
+      display: grid;
+      gap: 4px;
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px 12px;
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .language-option:hover,
+    .language-option.active {
+      background: var(--surface-2);
+    }
+
+    .flag-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 16px;
+      flex: 0 0 auto;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+    }
+
+    .flag-svg {
+      display: block;
+      width: 22px;
+      height: 16px;
+    }
+
+    .lang-caret {
+      margin-left: auto;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
     .hero {
       position: relative;
       overflow: hidden;
@@ -568,23 +640,77 @@
       .btn { width: 100%; }
       .form-row { grid-template-columns: 1fr; }
       .controls { width: 100%; }
-      .control-btn, .control-select { width: 100%; }
+      .control-btn, .language-menu, .language-toggle { width: 100%; }
+      .language-dropdown { position: static; min-width: 100%; margin-top: 8px; }
     }
   </style>
 </head>
 <body>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <symbol id="flag-cs" viewBox="0 0 24 16">
+      <rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#d7141a"/><polygon points="0,0 10,8 0,16" fill="#11457e"/>
+    </symbol>
+    <symbol id="flag-sk" viewBox="0 0 24 16">
+      <rect width="24" height="5.33" fill="#fff"/><rect y="5.33" width="24" height="5.33" fill="#0b4ea2"/><rect y="10.66" width="24" height="5.34" fill="#ee1c25"/>
+    </symbol>
+    <symbol id="flag-en" viewBox="0 0 24 16">
+      <rect width="24" height="16" fill="#012169"/>
+      <path d="M0 0l24 16M24 0L0 16" stroke="#fff" stroke-width="4"/>
+      <path d="M0 0l24 16M24 0L0 16" stroke="#c8102e" stroke-width="2"/>
+      <path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="6"/>
+      <path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="3"/>
+    </symbol>
+    <symbol id="flag-de" viewBox="0 0 24 16">
+      <rect width="24" height="5.33" fill="#000"/><rect y="5.33" width="24" height="5.33" fill="#dd0000"/><rect y="10.66" width="24" height="5.34" fill="#ffce00"/>
+    </symbol>
+    <symbol id="flag-ru" viewBox="0 0 24 16">
+      <rect width="24" height="5.33" fill="#fff"/><rect y="5.33" width="24" height="5.33" fill="#0039a6"/><rect y="10.66" width="24" height="5.34" fill="#d52b1e"/>
+    </symbol>
+    <symbol id="flag-pl" viewBox="0 0 24 16">
+      <rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#dc143c"/>
+    </symbol>
+  </svg>
+
   <div class="topbar">
     <div class="container topbar-inner">
       <div class="brand" data-i18n="brand">Sekání trávníků Brno</div>
       <div class="controls">
-        <select id="languageSelect" class="control-select" aria-label="Language selector">
-          <option value="cs">Čeština</option>
-          <option value="sk">Slovenčina</option>
-          <option value="en">English</option>
-          <option value="de">Deutsch</option>
-          <option value="ru">Русский</option>
-          <option value="pl">Polski</option>
-        </select>
+        <div class="language-menu">
+          <button id="languageToggle" class="control-btn language-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span id="currentLanguageIcon" class="flag-icon" aria-hidden="true">
+              <svg class="flag-svg" viewBox="0 0 24 16"><use href="#flag-cs"></use></svg>
+            </span>
+            <span id="currentLanguageLabel">Čeština</span>
+            <span class="lang-caret" aria-hidden="true">▾</span>
+          </button>
+          <div id="languageDropdown" class="language-dropdown" role="listbox" aria-label="Language selector">
+            <button type="button" class="language-option" data-lang="cs">
+              <span class="flag-icon" aria-hidden="true"><svg class="flag-svg" viewBox="0 0 24 16"><use href="#flag-cs"></use></svg></span>
+              <span>Čeština</span>
+            </button>
+            <button type="button" class="language-option" data-lang="sk">
+              <span class="flag-icon" aria-hidden="true"><svg class="flag-svg" viewBox="0 0 24 16"><use href="#flag-sk"></use></svg></span>
+              <span>Slovenčina</span>
+            </button>
+            <button type="button" class="language-option" data-lang="en">
+              <span class="flag-icon" aria-hidden="true"><svg class="flag-svg" viewBox="0 0 24 16"><use href="#flag-en"></use></svg></span>
+              <span>English</span>
+            </button>
+            <button type="button" class="language-option" data-lang="de">
+              <span class="flag-icon" aria-hidden="true"><svg class="flag-svg" viewBox="0 0 24 16"><use href="#flag-de"></use></svg></span>
+              <span>Deutsch</span>
+            </button>
+            <button type="button" class="language-option" data-lang="ru">
+              <span class="flag-icon" aria-hidden="true"><svg class="flag-svg" viewBox="0 0 24 16"><use href="#flag-ru"></use></svg></span>
+              <span>Русский</span>
+            </button>
+            <button type="button" class="language-option" data-lang="pl">
+              <span class="flag-icon" aria-hidden="true"><svg class="flag-svg" viewBox="0 0 24 16"><use href="#flag-pl"></use></svg></span>
+              <span>Polski</span>
+            </button>
+          </div>
+        </div>
         <button id="themeToggle" class="control-btn" type="button">🌙 Tmavý režim</button>
       </div>
     </div>
@@ -802,10 +928,6 @@
 
                 <button id="submitBtn" class="btn form-submit" type="submit" data-i18n="submitBtn">Odeslat poptávku</button>
               </form>
-
-              <div class="form-note" data-i18n="formNote">
-                Formulář je napojený na e-mail přes Web3Forms. Pro první zprovoznění vložte vlastní access key.
-              </div>
             </div>
           </div>
         </div>
@@ -1250,13 +1372,41 @@
       }
     };
 
-    const languageSelect = document.getElementById('languageSelect');
+    const languageToggle = document.getElementById('languageToggle');
+    const languageDropdown = document.getElementById('languageDropdown');
+    const currentLanguageLabel = document.getElementById('currentLanguageLabel');
+    const currentLanguageIcon = document.getElementById('currentLanguageIcon');
+    const languageOptions = document.querySelectorAll('.language-option');
     const themeToggle = document.getElementById('themeToggle');
     const root = document.documentElement;
     const successBox = document.getElementById('successBox');
     const errorBox = document.getElementById('errorBox');
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
+
+
+    const languageNames = {
+      cs: 'Čeština',
+      sk: 'Slovenčina',
+      en: 'English',
+      de: 'Deutsch',
+      ru: 'Русский',
+      pl: 'Polski'
+    };
+
+    function getFlagMarkup(lang) {
+      return `<svg class="flag-svg" viewBox="0 0 24 16"><use href="#flag-${lang}"></use></svg>`;
+    }
+
+    function updateLanguageMenu(lang) {
+      currentLanguageLabel.textContent = languageNames[lang] || languageNames.cs;
+      currentLanguageIcon.innerHTML = getFlagMarkup(lang);
+      languageOptions.forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === lang);
+      });
+      languageDropdown.classList.remove('open');
+      languageToggle.setAttribute('aria-expanded', 'false');
+    }
 
     function getSystemTheme() {
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -1299,7 +1449,7 @@
       themeToggle.textContent = currentTheme === 'dark' ? t.themeLight : t.themeDark;
 
       localStorage.setItem('lang', lang);
-      languageSelect.value = lang;
+      updateLanguageMenu(lang);
     }
 
     function initLanguage() {
@@ -1312,8 +1462,22 @@
       applyTheme(current === 'dark' ? 'light' : 'dark');
     });
 
-    languageSelect.addEventListener('change', (e) => {
-      applyLanguage(e.target.value);
+    languageToggle.addEventListener('click', () => {
+      const isOpen = languageDropdown.classList.toggle('open');
+      languageToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    languageOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        applyLanguage(option.dataset.lang);
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.language-menu')) {
+        languageDropdown.classList.remove('open');
+        languageToggle.setAttribute('aria-expanded', 'false');
+      }
     });
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
