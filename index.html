@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sekání trávníků Brno a okolí</title>
+  <meta name="description" content="Profesionální sekání trávníků v Brně a okolí. Dobrá cena, rychlá domluva, pravidelná údržba i jednorázové sekání." />
+  <style>
+    :root {
+      --green-dark: #0b3d2e;
+      --green: #157347;
+      --green-soft: #e8f5ee;
+      --lime: #7ccf4c;
+      --text: #10231b;
+      --muted: #5b6b64;
+      --white: #ffffff;
+      --bg: #f7faf8;
+      --surface: #ffffff;
+      --surface-2: #f4f7f5;
+      --border: #dbe7e0;
+      --shadow: 0 10px 30px rgba(16, 35, 27, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    html[data-theme="dark"] {
+      --green-dark: #0d3025;
+      --green: #36a269;
+      --green-soft: #133126;
+      --lime: #8ae35a;
+      --text: #edf6f0;
+      --muted: #adc0b5;
+      --white: #0f1713;
+      --bg: #0a110d;
+      --surface: #101914;
+      --surface-2: #17231d;
+      --border: #24342c;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--white) 84%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-btn,
+    .control-select {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 14px;
+      font: inherit;
+      box-shadow: var(--shadow);
+    }
+
+    .control-btn {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0b3d2e 0%, #157347 55%, #7ccf4c 100%);
+      color: #fff;
+    }
+
+    html[data-theme="dark"] .hero {
+      background: linear-gradient(135deg, #071e17 0%, #114f36 55%, #499d3f 100%);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 320px;
+      height: 320px;
+      background: #d9ff9b;
+      top: -40px;
+      right: -80px;
+    }
+
+    .hero::after {
+      width: 260px;
+      height: 260px;
+      background: #fff3a3;
+      bottom: -60px;
+      left: 20%;
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+      padding: 88px 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 14px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    h1, h2, h3, h4, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero p.lead {
+      font-size: 1.15rem;
+      max-width: 680px;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 18px;
+    }
+
+    .hero .slogan {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #f5ffd7;
+      margin-bottom: 26px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 24px;
+      border-radius: 18px;
+      font-weight: 700;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease, border-color .2s ease;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: #fff;
+      color: #0b3d2e;
+      box-shadow: 0 12px 28px rgba(11,61,46,0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.28);
+      backdrop-filter: blur(8px);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 720px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.11);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 20px;
+      padding: 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.7rem;
+      margin-bottom: 4px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.12);
+      padding: 22px;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 20px 50px rgba(11,61,46,0.24);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-card-inner {
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 24px;
+      padding: 30px;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+
+    .hero-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .hero-list-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--green-soft);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: var(--text);
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin-bottom: 42px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      transition: background .25s ease, color .25s ease;
+    }
+
+    .card .icon {
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .soft {
+      background: var(--bg);
+      transition: background .25s ease;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .steps {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .coverage {
+      background: linear-gradient(180deg, #0d4d39 0%, #0b3d2e 100%);
+      color: #fff;
+      border-radius: 32px;
+      padding: 34px;
+      box-shadow: 0 18px 40px rgba(11,61,46,0.22);
+    }
+
+    html[data-theme="dark"] .coverage {
+      background: linear-gradient(180deg, #0b2f24 0%, #081c15 100%);
+    }
+
+    .coverage p { color: rgba(255,255,255,0.88); }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0 30px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      font-size: 0.95rem;
+    }
+
+    .mini-panel {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .cta {
+      padding-top: 0;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #157347 0%, #7ccf4c 100%);
+      border-radius: 34px;
+      padding: 42px;
+      color: #fff;
+      box-shadow: 0 22px 50px rgba(21,115,71,0.24);
+    }
+
+    html[data-theme="dark"] .cta-box {
+      background: linear-gradient(135deg, #114b33 0%, #4f993b 100%);
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 24px;
+      padding: 28px;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 15px;
+      font: inherit;
+      color: var(--text);
+      background: var(--surface-2);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color .25s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(21, 115, 71, 0.10);
+      background: var(--surface);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--green);
+      color: #fff;
+      margin-top: 6px;
+    }
+
+    .form-note {
+      margin-top: 14px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .success-box, .error-box {
+      display: none;
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      font-weight: 600;
+    }
+
+    .success-box {
+      background: var(--green-soft);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .error-box {
+      background: #ffe9e9;
+      border: 1px solid #f0b5b5;
+      color: #7c1f1f;
+    }
+
+    .success-box.show, .error-box.show {
+      display: block;
+    }
+
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner,
+      .two-col,
+      .cta-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        padding: 64px 0;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 68px 0; }
+      .container { width: min(var(--max), calc(100% - 22px)); }
+      .card, .coverage, .cta-box, .hero-card-inner, .contact-card { padding: 22px; }
+      .footer-inner, .topbar-inner { flex-direction: column; align-items: stretch; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .form-row { grid-template-columns: 1fr; }
+      .controls { width: 100%; }
+      .control-btn, .control-select { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand" data-i18n="brand">Sekání trávníků Brno</div>
+      <div class="controls">
+        <select id="languageSelect" class="control-select" aria-label="Language selector">
+          <option value="cs">Čeština</option>
+          <option value="sk">Slovenčina</option>
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="ru">Русский</option>
+          <option value="pl">Polski</option>
+        </select>
+        <button id="themeToggle" class="control-btn" type="button">🌙 Tmavý režim</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="badge" data-i18n="badge">Sekání trávníků • Brno a okolí</div>
+        <h1 data-i18n="heroTitle">Perfektně posekaný trávník bez starostí.</h1>
+        <p class="lead" data-i18n="heroLead">
+          Profesionální sekání trávníku pro rodinné domy, firmy i pozemky v Brně a okolí. Rychlá domluva, spolehlivý termín a výsledek, který je hned vidět.
+        </p>
+        <p class="slogan" data-i18n="slogan">Vaše tráva, naše radost!</p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#kontakt" data-i18n="ctaPrimary">Nezávazně poptat</a>
+          <a class="btn btn-secondary" href="tel:+420123456789" data-i18n="ctaSecondary">Zavolat hned</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>24 h</strong>
+            <span data-i18n="stat1">rychlá reakce na poptávku</span>
+          </div>
+          <div class="stat">
+            <strong data-i18n="statPriceStrong">Dobrá cena</strong>
+            <span data-i18n="stat2">férová nabídka bez zbytečných příplatků</span>
+          </div>
+          <div class="stat">
+            <strong>Brno+</strong>
+            <span data-i18n="stat3">město i okolní obce</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div class="eyebrow" data-i18n="whyUs">Proč právě my</div>
+          <h2 data-i18n="heroCardTitle">Trávník, který dělá skvělý první dojem</h2>
+          <p data-i18n="heroCardText">
+            Ať potřebujete jednorázově upravit zarostlý pozemek, nebo hledáte dlouhodobou údržbu, postaráme se o čistý a reprezentativní výsledek za dobrou cenu.
+          </p>
+
+          <div class="hero-list">
+            <div class="hero-list-item"><span>✔️</span><span data-i18n="benefit1">Působíme v Brně a širokém okolí</span></div>
+            <div class="hero-list-item"><span>✔️</span><span data-i18n="benefit2">Rychlá domluva a férová cena předem</span></div>
+            <div class="hero-list-item"><span>✔️</span><span data-i18n="benefit3">Vlastní technika pro malé i větší pozemky</span></div>
+            <div class="hero-list-item"><span>✔️</span><span data-i18n="benefit4">Spolehlivé termíny bez zbytečného čekání</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <div class="eyebrow" data-i18n="servicesEyebrow">Naše služby</div>
+          <h2 data-i18n="servicesTitle">Postaráme se o každý typ trávníku</h2>
+          <p data-i18n="servicesText">
+            Od menších zahrad až po větší pozemky. Pracujeme pečlivě, efektivně a s důrazem na upravený vzhled celého prostoru za dobrou cenu.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">🌿</div>
+            <h3 data-i18n="service1Title">Pravidelné sekání</h3>
+            <p data-i18n="service1Text">Udržujeme trávník krátký, hustý a upravený po celou sezónu. Ideální pro rodinné domy, firemní areály i bytové domy.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">✂️</div>
+            <h3 data-i18n="service2Title">Jednorázový zásah</h3>
+            <p data-i18n="service2Text">Přerostlá zahrada, chata po zimě nebo pozemek před prodejem? Přijedeme rychle a dáme vše do pořádku.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">✅</div>
+            <h3 data-i18n="service3Title">Dosekání detailů</h3>
+            <p data-i18n="service3Text">Začištění kolem obrubníků, stromů, plotů a chodníků pro opravdu profesionální výsledek bez kompromisů.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft">
+      <div class="container two-col">
+        <div>
+          <div class="eyebrow" data-i18n="howEyebrow">Jak to probíhá</div>
+          <h2 data-i18n="howTitle">Jednoduše, rychle a bez komplikací</h2>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div>
+                <h3 data-i18n="step1Title">Ozvete se nám</h3>
+                <p data-i18n="step1Text">Pošlete krátkou poptávku nebo zavolejte. Stačí lokalita, přibližná velikost pozemku a ideální termín.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div>
+                <h3 data-i18n="step2Title">Navrhneme řešení</h3>
+                <p data-i18n="step2Text">Doporučíme vhodný postup, domluvíme rozsah prací a připravíme nezávaznou cenovou nabídku.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div>
+                <h3 data-i18n="step3Title">Posekáme a uklidíme</h3>
+                <p data-i18n="step3Text">Přijedeme v domluvený čas, práci odvedeme pečlivě a zanecháme po sobě upravený prostor.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="coverage">
+          <div class="eyebrow" style="color:#c9f2d7;" data-i18n="whereEyebrow">Kde pracujeme</div>
+          <h2 data-i18n="whereTitle">Brno a okolní města i obce</h2>
+          <p data-i18n="whereText">
+            Nejčastěji vyjíždíme po Brně a okolí. Po domluvě přijedeme i dál v rámci Jihomoravského kraje.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Brno-město</span>
+            <span class="chip">Brno-venkov</span>
+            <span class="chip">Šlapanice</span>
+            <span class="chip">Modřice</span>
+          </div>
+
+          <div class="mini-panel">
+            <h3 data-i18n="maintenanceTitle">Hodí se vám pravidelná údržba?</h3>
+            <p data-i18n="maintenanceText">
+              Nastavíme interval sekání podle růstu trávníku a typu pozemku. Nemusíte nic hlídat — jen si užívat upravenou zahradu.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-grid">
+            <div>
+              <div class="eyebrow" style="color:#e8ffe0;" data-i18n="contactEyebrow">Neztrácejte čas sekačkou</div>
+              <h2 data-i18n="contactTitle">Objednejte si sekání trávníku ještě dnes</h2>
+              <p style="font-size:1.08rem;color:rgba(255,255,255,0.92);max-width:720px;" data-i18n="contactText">
+                Napište nám a připravíme nabídku podle velikosti pozemku, stavu trávníku a lokality. Bez závazků, jasně, rychle a za dobrou cenu.
+              </p>
+            </div>
+
+            <div id="kontakt" class="contact-card">
+              <h3 data-i18n="formTitle">Napište si o nezávaznou nabídku</h3>
+              <p style="color:var(--muted);margin-bottom:18px;" data-i18n="formIntro">
+                Vyplňte krátký formulář a my se vám ozveme co nejdříve zpět.
+              </p>
+
+              <div id="successBox" class="success-box" data-i18n="successMessage">
+                Děkujeme za vaši poptávku. Vaši zprávu jsme přijali a co nejdříve se vám ozveme zpět.
+              </div>
+
+              <div id="errorBox" class="error-box" data-i18n="errorMessage">
+                Odeslání se nepodařilo. Zkuste to prosím znovu.
+              </div>
+
+              <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                <input type="hidden" name="access_key" value="d73b61e5-0b7b-4cf3-95b3-32f344d6018a" />
+                <input type="hidden" name="subject" value="Nová poptávka - sekání trávníku" />
+                <input type="hidden" name="from_name" value="Web - Sekání trávníků Brno" />
+                <input type="hidden" name="botcheck" style="display:none;" />
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="jmeno" data-i18n="labelFirstName">Jméno</label>
+                    <input id="jmeno" name="Jméno" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="prijmeni" data-i18n="labelLastName">Příjmení</label>
+                    <input id="prijmeni" name="Příjmení" type="text" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="telefon" data-i18n="labelPhone">Telefon</label>
+                    <input id="telefon" name="Telefon" type="tel" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="email" data-i18n="labelEmail">E-mail</label>
+                    <input id="email" name="email" type="email" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="lokalita" data-i18n="labelLocation">Lokalita</label>
+                    <input id="lokalita" name="Lokalita" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="velikost" data-i18n="labelArea">Přibližná velikost pozemku v m²</label>
+                    <input id="velikost" name="Velikost pozemku (m²)" type="number" min="1" step="1" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="zprava" data-i18n="labelMessage">Vlastní zpráva</label>
+                  <textarea id="zprava" name="Zpráva" rows="5"></textarea>
+                </div>
+
+                <button id="submitBtn" class="btn form-submit" type="submit" data-i18n="submitBtn">Odeslat poptávku</button>
+              </form>
+
+              <div class="form-note" data-i18n="formNote">
+                Formulář je napojený na e-mail přes Web3Forms. Pro první zprovoznění vložte vlastní access key.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div data-i18n="footer1">© 2026 Sekání trávníků Brno. Všechna práva vyhrazena.</div>
+      <div data-i18n="footer2">Profesionální údržba zeleně pro Brno a okolí.</div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      cs: {
+        pageTitle: "Sekání trávníků Brno a okolí",
+        metaDescription: "Profesionální sekání trávníků v Brně a okolí. Dobrá cena, rychlá domluva, pravidelná údržba i jednorázové sekání.",
+        brand: "Sekání trávníků Brno",
+        badge: "Sekání trávníků • Brno a okolí",
+        heroTitle: "Perfektně posekaný trávník bez starostí.",
+        heroLead: "Profesionální sekání trávníku pro rodinné domy, firmy i pozemky v Brně a okolí. Rychlá domluva, spolehlivý termín a výsledek, který je hned vidět.",
+        slogan: "Vaše tráva, naše radost!",
+        ctaPrimary: "Nezávazně poptat",
+        ctaSecondary: "Zavolat hned",
+        stat1: "rychlá reakce na poptávku",
+        statPriceStrong: "Dobrá cena",
+        stat2: "férová nabídka bez zbytečných příplatků",
+        stat3: "město i okolní obce",
+        whyUs: "Proč právě my",
+        heroCardTitle: "Trávník, který dělá skvělý první dojem",
+        heroCardText: "Ať potřebujete jednorázově upravit zarostlý pozemek, nebo hledáte dlouhodobou údržbu, postaráme se o čistý a reprezentativní výsledek za dobrou cenu.",
+        benefit1: "Působíme v Brně a širokém okolí",
+        benefit2: "Rychlá domluva a férová cena předem",
+        benefit3: "Vlastní technika pro malé i větší pozemky",
+        benefit4: "Spolehlivé termíny bez zbytečného čekání",
+        servicesEyebrow: "Naše služby",
+        servicesTitle: "Postaráme se o každý typ trávníku",
+        servicesText: "Od menších zahrad až po větší pozemky. Pracujeme pečlivě, efektivně a s důrazem na upravený vzhled celého prostoru za dobrou cenu.",
+        service1Title: "Pravidelné sekání",
+        service1Text: "Udržujeme trávník krátký, hustý a upravený po celou sezónu. Ideální pro rodinné domy, firemní areály i bytové domy.",
+        service2Title: "Jednorázový zásah",
+        service2Text: "Přerostlá zahrada, chata po zimě nebo pozemek před prodejem? Přijedeme rychle a dáme vše do pořádku.",
+        service3Title: "Dosekání detailů",
+        service3Text: "Začištění kolem obrubníků, stromů, plotů a chodníků pro opravdu profesionální výsledek bez kompromisů.",
+        howEyebrow: "Jak to probíhá",
+        howTitle: "Jednoduše, rychle a bez komplikací",
+        step1Title: "Ozvete se nám",
+        step1Text: "Pošlete krátkou poptávku nebo zavolejte. Stačí lokalita, přibližná velikost pozemku a ideální termín.",
+        step2Title: "Navrhneme řešení",
+        step2Text: "Doporučíme vhodný postup, domluvíme rozsah prací a připravíme nezávaznou cenovou nabídku.",
+        step3Title: "Posekáme a uklidíme",
+        step3Text: "Přijedeme v domluvený čas, práci odvedeme pečlivě a zanecháme po sobě upravený prostor.",
+        whereEyebrow: "Kde pracujeme",
+        whereTitle: "Brno a okolní města i obce",
+        whereText: "Nejčastěji vyjíždíme po Brně a okolí. Po domluvě přijedeme i dál v rámci Jihomoravského kraje.",
+        maintenanceTitle: "Hodí se vám pravidelná údržba?",
+        maintenanceText: "Nastavíme interval sekání podle růstu trávníku a typu pozemku. Nemusíte nic hlídat — jen si užívat upravenou zahradu.",
+        contactEyebrow: "Neztrácejte čas sekačkou",
+        contactTitle: "Objednejte si sekání trávníku ještě dnes",
+        contactText: "Napište nám a připravíme nabídku podle velikosti pozemku, stavu trávníku a lokality. Bez závazků, jasně, rychle a za dobrou cenu.",
+        formTitle: "Napište si o nezávaznou nabídku",
+        formIntro: "Vyplňte krátký formulář a my se vám ozveme co nejdříve zpět.",
+        successMessage: "Děkujeme za vaši poptávku. Vaši zprávu jsme přijali a co nejdříve se vám ozveme zpět.",
+        errorMessage: "Odeslání se nepodařilo. Zkuste to prosím znovu.",
+        labelFirstName: "Jméno",
+        labelLastName: "Příjmení",
+        labelPhone: "Telefon",
+        labelEmail: "E-mail",
+        labelLocation: "Lokalita",
+        labelArea: "Přibližná velikost pozemku v m²",
+        labelMessage: "Vlastní zpráva",
+        submitBtn: "Odeslat poptávku",
+        formNote: "Formulář je napojený na e-mail přes Web3Forms. Pro první zprovoznění vložte vlastní access key.",
+        footer1: "© 2026 Sekání trávníků Brno. Všechna práva vyhrazena.",
+        footer2: "Profesionální údržba zeleně pro Brno a okolí.",
+        themeLight: "☀️ Světlý režim",
+        themeDark: "🌙 Tmavý režim",
+        phFirstName: "Např. Jan",
+        phLastName: "Např. Novák",
+        phPhone: "+420 123 456 789",
+        phEmail: "vas@email.cz",
+        phLocation: "Např. Brno-Žabovřesky",
+        phArea: "Např. 450",
+        phMessage: "Napište stav pozemku, termín nebo další informace..."
+      },
+      sk: {
+        pageTitle: "Kosenie trávnikov Brno a okolie",
+        metaDescription: "Profesionálne kosenie trávnikov v Brne a okolí. Dobrá cena, rýchla dohoda, pravidelná údržba aj jednorazové kosenie.",
+        brand: "Kosenie trávnikov Brno",
+        badge: "Kosenie trávnikov • Brno a okolie",
+        heroTitle: "Perfektne pokosený trávnik bez starostí.",
+        heroLead: "Profesionálne kosenie trávnika pre rodinné domy, firmy aj pozemky v Brne a okolí. Rýchla dohoda, spoľahlivý termín a výsledok, ktorý je hneď vidieť.",
+        slogan: "Vaša tráva, naša radosť!",
+        ctaPrimary: "Nezáväzne dopytovať",
+        ctaSecondary: "Zavolať hneď",
+        stat1: "rýchla reakcia na dopyt",
+        statPriceStrong: "Dobrá cena",
+        stat2: "férová ponuka bez zbytočných príplatkov",
+        stat3: "mesto aj okolité obce",
+        whyUs: "Prečo práve my",
+        heroCardTitle: "Trávnik, ktorý robí skvelý prvý dojem",
+        heroCardText: "Či už potrebujete jednorazovo upraviť zarastený pozemok, alebo hľadáte dlhodobú údržbu, postaráme sa o čistý a reprezentatívny výsledok za dobrú cenu.",
+        benefit1: "Pôsobíme v Brne a širokom okolí",
+        benefit2: "Rýchla dohoda a férová cena vopred",
+        benefit3: "Vlastná technika pre malé aj väčšie pozemky",
+        benefit4: "Spoľahlivé termíny bez zbytočného čakania",
+        servicesEyebrow: "Naše služby",
+        servicesTitle: "Postaráme sa o každý typ trávnika",
+        servicesText: "Od menších záhrad až po väčšie pozemky. Pracujeme dôkladne, efektívne a s dôrazom na upravený vzhľad celého priestoru za dobrú cenu.",
+        service1Title: "Pravidelné kosenie",
+        service1Text: "Udržiavame trávnik krátky, hustý a upravený počas celej sezóny. Ideálne pre rodinné domy, firemné areály aj bytové domy.",
+        service2Title: "Jednorazový zásah",
+        service2Text: "Prerastená záhrada, chata po zime alebo pozemok pred predajom? Prídeme rýchlo a dáme všetko do poriadku.",
+        service3Title: "Dokosenie detailov",
+        service3Text: "Začistenie okolo obrubníkov, stromov, plotov a chodníkov pre naozaj profesionálny výsledok bez kompromisov.",
+        howEyebrow: "Ako to prebieha",
+        howTitle: "Jednoducho, rýchlo a bez komplikácií",
+        step1Title: "Ozvete sa nám",
+        step1Text: "Pošlite krátky dopyt alebo zavolajte. Stačí lokalita, približná veľkosť pozemku a ideálny termín.",
+        step2Title: "Navrhneme riešenie",
+        step2Text: "Odporučíme vhodný postup, dohodneme rozsah prác a pripravíme nezáväznú cenovú ponuku.",
+        step3Title: "Pokosíme a upraceme",
+        step3Text: "Prídeme v dohodnutom čase, prácu odvedieme dôkladne a zanecháme po sebe upravený priestor.",
+        whereEyebrow: "Kde pracujeme",
+        whereTitle: "Brno a okolité mestá aj obce",
+        whereText: "Najčastejšie vyrážame po Brne a okolí. Po dohode prídeme aj ďalej v rámci Juhomoravského kraja.",
+        maintenanceTitle: "Hodí sa vám pravidelná údržba?",
+        maintenanceText: "Nastavíme interval kosenia podľa rastu trávnika a typu pozemku. Nemusíte nič strážiť — len si užívať upravenú záhradu.",
+        contactEyebrow: "Nestrácajte čas kosačkou",
+        contactTitle: "Objednajte si kosenie trávnika ešte dnes",
+        contactText: "Napíšte nám a pripravíme ponuku podľa veľkosti pozemku, stavu trávnika a lokality. Bez záväzkov, jasne, rýchlo a za dobrú cenu.",
+        formTitle: "Napíšte si o nezáväznú ponuku",
+        formIntro: "Vyplňte krátky formulár a my sa vám ozveme čo najskôr späť.",
+        successMessage: "Ďakujeme za váš dopyt. Vašu správu sme prijali a čo najskôr sa vám ozveme späť.",
+        errorMessage: "Odoslanie sa nepodarilo. Skúste to prosím znova.",
+        labelFirstName: "Meno",
+        labelLastName: "Priezvisko",
+        labelPhone: "Telefón",
+        labelEmail: "E-mail",
+        labelLocation: "Lokalita",
+        labelArea: "Približná veľkosť pozemku v m²",
+        labelMessage: "Vlastná správa",
+        submitBtn: "Odoslať dopyt",
+        formNote: "Formulár je napojený na e-mail cez Web3Forms. Na prvé spustenie vložte vlastný access key.",
+        footer1: "© 2026 Kosenie trávnikov Brno. Všetky práva vyhradené.",
+        footer2: "Profesionálna údržba zelene pre Brno a okolie.",
+        themeLight: "☀️ Svetlý režim",
+        themeDark: "🌙 Tmavý režim",
+        phFirstName: "Napr. Ján",
+        phLastName: "Napr. Novák",
+        phPhone: "+420 123 456 789",
+        phEmail: "vas@email.sk",
+        phLocation: "Napr. Brno-Žabovřesky",
+        phArea: "Napr. 450",
+        phMessage: "Napíšte stav pozemku, termín alebo ďalšie informácie..."
+      },
+      en: {
+        pageTitle: "Lawn Mowing in Brno and Surroundings",
+        metaDescription: "Professional lawn mowing in Brno and nearby areas. Great price, fast response, regular maintenance and one-time mowing.",
+        brand: "Brno Lawn Mowing",
+        badge: "Lawn mowing • Brno and surroundings",
+        heroTitle: "A perfectly cut lawn without the hassle.",
+        heroLead: "Professional lawn mowing for family homes, companies, and plots in Brno and nearby areas. Fast communication, reliable scheduling, and results you can see immediately.",
+        slogan: "Your grass, our joy!",
+        ctaPrimary: "Request a quote",
+        ctaSecondary: "Call now",
+        stat1: "fast response to inquiries",
+        statPriceStrong: "Great price",
+        stat2: "fair offer without unnecessary extras",
+        stat3: "city and nearby towns",
+        whyUs: "Why choose us",
+        heroCardTitle: "A lawn that makes a great first impression",
+        heroCardText: "Whether you need a one-time cleanup of an overgrown plot or long-term maintenance, we deliver a clean and professional result at a great price.",
+        benefit1: "We operate in Brno and the wider area",
+        benefit2: "Fast communication and fair pricing upfront",
+        benefit3: "Our own equipment for small and large plots",
+        benefit4: "Reliable appointments without unnecessary delays",
+        servicesEyebrow: "Our services",
+        servicesTitle: "We take care of every type of lawn",
+        servicesText: "From small gardens to larger plots. We work carefully, efficiently, and with a strong focus on a neat overall appearance at a great price.",
+        service1Title: "Regular mowing",
+        service1Text: "We keep your lawn short, dense, and tidy throughout the season. Ideal for family homes, company grounds, and apartment buildings.",
+        service2Title: "One-time service",
+        service2Text: "Overgrown garden, cottage after winter, or a plot before sale? We will come quickly and put everything in order.",
+        service3Title: "Finishing details",
+        service3Text: "Trimming around curbs, trees, fences, and walkways for a truly professional result without compromise.",
+        howEyebrow: "How it works",
+        howTitle: "Simple, fast, and without complications",
+        step1Title: "Contact us",
+        step1Text: "Send a short inquiry or give us a call. Just tell us the location, approximate plot size, and your preferred date.",
+        step2Title: "We suggest a solution",
+        step2Text: "We will recommend the right approach, agree on the scope of work, and prepare a no-obligation price offer.",
+        step3Title: "We mow and clean up",
+        step3Text: "We arrive at the agreed time, do the job carefully, and leave the space neat and tidy.",
+        whereEyebrow: "Where we work",
+        whereTitle: "Brno and nearby towns and villages",
+        whereText: "We most often work across Brno and the surrounding area. By agreement, we can also travel further within the South Moravian Region.",
+        maintenanceTitle: "Need regular maintenance?",
+        maintenanceText: "We will set the mowing interval according to lawn growth and plot type. You do not need to keep track of anything — just enjoy a tidy garden.",
+        contactEyebrow: "Do not waste time with a mower",
+        contactTitle: "Order lawn mowing today",
+        contactText: "Write to us and we will prepare an offer based on plot size, lawn condition, and location. No obligations, clear, fast, and at a great price.",
+        formTitle: "Request a no-obligation quote",
+        formIntro: "Fill out the short form and we will get back to you as soon as possible.",
+        successMessage: "Thank you for your inquiry. We have received your message and will get back to you as soon as possible.",
+        errorMessage: "Sending failed. Please try again.",
+        labelFirstName: "First name",
+        labelLastName: "Last name",
+        labelPhone: "Phone",
+        labelEmail: "Email",
+        labelLocation: "Location",
+        labelArea: "Approximate plot size in m²",
+        labelMessage: "Your message",
+        submitBtn: "Send inquiry",
+        formNote: "This form is connected to email via Web3Forms. Insert your own access key to activate it.",
+        footer1: "© 2026 Brno Lawn Mowing. All rights reserved.",
+        footer2: "Professional green space maintenance for Brno and nearby areas.",
+        themeLight: "☀️ Light mode",
+        themeDark: "🌙 Dark mode",
+        phFirstName: "e.g. John",
+        phLastName: "e.g. Smith",
+        phPhone: "+420 123 456 789",
+        phEmail: "your@email.com",
+        phLocation: "e.g. Brno-Žabovřesky",
+        phArea: "e.g. 450",
+        phMessage: "Tell us about the plot, preferred date, or any other details..."
+      },
+      de: {
+        pageTitle: "Rasenmähen in Brünn und Umgebung",
+        metaDescription: "Professionelles Rasenmähen in Brünn und Umgebung. Guter Preis, schnelle Kommunikation, regelmäßige Pflege und einmalige Einsätze.",
+        brand: "Rasenmähen Brünn",
+        badge: "Rasenmähen • Brünn und Umgebung",
+        heroTitle: "Perfekt gemähter Rasen ohne Aufwand.",
+        heroLead: "Professionelles Rasenmähen für Einfamilienhäuser, Firmen und Grundstücke in Brünn und Umgebung. Schnelle Kommunikation, zuverlässige Termine und sichtbare Ergebnisse.",
+        slogan: "Ihr Gras, unsere Freude!",
+        ctaPrimary: "Unverbindlich anfragen",
+        ctaSecondary: "Jetzt anrufen",
+        stat1: "schnelle Reaktion auf Anfragen",
+        statPriceStrong: "Guter Preis",
+        stat2: "faires Angebot ohne unnötige Zuschläge",
+        stat3: "Stadt und umliegende Gemeinden",
+        whyUs: "Warum wir",
+        heroCardTitle: "Ein Rasen, der einen starken ersten Eindruck macht",
+        heroCardText: "Ob Sie ein überwachsenes Grundstück einmalig herrichten lassen möchten oder eine langfristige Pflege suchen — wir liefern ein sauberes und professionelles Ergebnis zu einem guten Preis.",
+        benefit1: "Wir arbeiten in Brünn und in der weiteren Umgebung",
+        benefit2: "Schnelle Kommunikation und faire Preise im Voraus",
+        benefit3: "Eigene Technik für kleine und große Grundstücke",
+        benefit4: "Zuverlässige Termine ohne unnötige Wartezeiten",
+        servicesEyebrow: "Unsere Leistungen",
+        servicesTitle: "Wir kümmern uns um jede Art von Rasen",
+        servicesText: "Von kleinen Gärten bis zu größeren Grundstücken. Wir arbeiten sorgfältig, effizient und mit Fokus auf ein gepflegtes Gesamtbild zu einem guten Preis.",
+        service1Title: "Regelmäßiges Mähen",
+        service1Text: "Wir halten Ihren Rasen die ganze Saison über kurz, dicht und gepflegt. Ideal für Einfamilienhäuser, Firmengelände und Wohnanlagen.",
+        service2Title: "Einmaliger Einsatz",
+        service2Text: "Überwucherter Garten, Ferienhaus nach dem Winter oder Grundstück vor dem Verkauf? Wir kommen schnell und bringen alles in Ordnung.",
+        service3Title: "Feinarbeiten",
+        service3Text: "Nacharbeiten an Bordsteinen, Bäumen, Zäunen und Wegen für ein wirklich professionelles Ergebnis ohne Kompromisse.",
+        howEyebrow: "So läuft es ab",
+        howTitle: "Einfach, schnell und unkompliziert",
+        step1Title: "Sie kontaktieren uns",
+        step1Text: "Senden Sie eine kurze Anfrage oder rufen Sie uns an. Es reichen Standort, ungefähre Grundstücksgröße und Wunschtermin.",
+        step2Title: "Wir schlagen eine Lösung vor",
+        step2Text: "Wir empfehlen das passende Vorgehen, vereinbaren den Arbeitsumfang und erstellen ein unverbindliches Preisangebot.",
+        step3Title: "Wir mähen und räumen auf",
+        step3Text: "Wir kommen zum vereinbarten Zeitpunkt, erledigen die Arbeit sorgfältig und hinterlassen einen ordentlichen Platz.",
+        whereEyebrow: "Wo wir arbeiten",
+        whereTitle: "Brünn und umliegende Städte und Gemeinden",
+        whereText: "Am häufigsten sind wir in Brünn und Umgebung im Einsatz. Nach Absprache fahren wir auch weiter innerhalb der Südmährischen Region.",
+        maintenanceTitle: "Passt regelmäßige Pflege zu Ihnen?",
+        maintenanceText: "Wir legen das Mähintervall je nach Wachstum des Rasens und Art des Grundstücks fest. Sie müssen nichts überwachen — genießen Sie einfach einen gepflegten Garten.",
+        contactEyebrow: "Verlieren Sie keine Zeit mit dem Rasenmäher",
+        contactTitle: "Bestellen Sie noch heute Ihr Rasenmähen",
+        contactText: "Schreiben Sie uns und wir erstellen ein Angebot nach Grundstücksgröße, Zustand des Rasens und Standort. Unverbindlich, klar, schnell und zu einem guten Preis.",
+        formTitle: "Fordern Sie ein unverbindliches Angebot an",
+        formIntro: "Füllen Sie das kurze Formular aus und wir melden uns so schnell wie möglich bei Ihnen.",
+        successMessage: "Vielen Dank für Ihre Anfrage. Wir haben Ihre Nachricht erhalten und melden uns so schnell wie möglich bei Ihnen.",
+        errorMessage: "Senden fehlgeschlagen. Bitte versuchen Sie es erneut.",
+        labelFirstName: "Vorname",
+        labelLastName: "Nachname",
+        labelPhone: "Telefon",
+        labelEmail: "E-Mail",
+        labelLocation: "Ort",
+        labelArea: "Ungefähre Grundstücksgröße in m²",
+        labelMessage: "Nachricht",
+        submitBtn: "Anfrage senden",
+        formNote: "Dieses Formular ist per Web3Forms mit E-Mail verbunden. Fügen Sie Ihren eigenen Access Key ein, um es zu aktivieren.",
+        footer1: "© 2026 Rasenmähen Brünn. Alle Rechte vorbehalten.",
+        footer2: "Professionelle Grünflächenpflege für Brünn und Umgebung.",
+        themeLight: "☀️ Heller Modus",
+        themeDark: "🌙 Dunkler Modus",
+        phFirstName: "z. B. Jan",
+        phLastName: "z. B. Novak",
+        phPhone: "+420 123 456 789",
+        phEmail: "ihre@email.de",
+        phLocation: "z. B. Brno-Žabovřesky",
+        phArea: "z. B. 450",
+        phMessage: "Beschreiben Sie das Grundstück, den Termin oder weitere Informationen..."
+      },
+      ru: {
+        pageTitle: "Стрижка газонов в Брно и окрестностях",
+        metaDescription: "Профессиональная стрижка газонов в Брно и рядом. Хорошая цена, быстрый отклик, регулярный уход и разовые работы.",
+        brand: "Стрижка газонов Брно",
+        badge: "Стрижка газонов • Брно и окрестности",
+        heroTitle: "Идеально подстриженный газон без хлопот.",
+        heroLead: "Профессиональная стрижка газонов для домов, компаний и участков в Брно и окрестностях. Быстрая связь, надежные сроки и результат, который сразу видно.",
+        slogan: "Ваша трава — наша радость!",
+        ctaPrimary: "Оставить заявку",
+        ctaSecondary: "Позвонить сейчас",
+        stat1: "быстрый ответ на заявку",
+        statPriceStrong: "Хорошая цена",
+        stat2: "честное предложение без лишних доплат",
+        stat3: "город и ближайшие населенные пункты",
+        whyUs: "Почему мы",
+        heroCardTitle: "Газон, который производит отличное первое впечатление",
+        heroCardText: "Нужна ли вам разовая обработка заросшего участка или долгосрочный уход — мы обеспечим чистый и профессиональный результат по хорошей цене.",
+        benefit1: "Работаем в Брно и по всей округе",
+        benefit2: "Быстрая связь и честная цена заранее",
+        benefit3: "Собственная техника для маленьких и больших участков",
+        benefit4: "Надежные сроки без лишнего ожидания",
+        servicesEyebrow: "Наши услуги",
+        servicesTitle: "Мы позаботимся о любом типе газона",
+        servicesText: "От небольших садов до крупных участков. Работаем аккуратно, эффективно и с упором на ухоженный внешний вид территории по хорошей цене.",
+        service1Title: "Регулярная стрижка",
+        service1Text: "Поддерживаем газон коротким, густым и аккуратным весь сезон. Идеально для домов, территорий компаний и жилых комплексов.",
+        service2Title: "Разовый выезд",
+        service2Text: "Заросший сад, дача после зимы или участок перед продажей? Быстро приедем и приведем всё в порядок.",
+        service3Title: "Финишная обработка",
+        service3Text: "Подрезка у бордюров, деревьев, заборов и дорожек для действительно профессионального результата без компромиссов.",
+        howEyebrow: "Как это работает",
+        howTitle: "Просто, быстро и без лишних сложностей",
+        step1Title: "Вы связываетесь с нами",
+        step1Text: "Отправьте короткую заявку или позвоните. Достаточно указать локацию, примерный размер участка и желаемую дату.",
+        step2Title: "Мы предложим решение",
+        step2Text: "Подберем подходящий вариант, согласуем объем работ и подготовим предложение без обязательств.",
+        step3Title: "Мы подстрижем и уберем",
+        step3Text: "Приедем в согласованное время, аккуратно выполним работу и оставим после себя порядок.",
+        whereEyebrow: "Где мы работаем",
+        whereTitle: "Брно и ближайшие города и поселки",
+        whereText: "Чаще всего мы выезжаем по Брно и окрестностям. По договоренности можем приехать и дальше по Южноморавскому краю.",
+        maintenanceTitle: "Нужен регулярный уход?",
+        maintenanceText: "Мы настроим периодичность стрижки в зависимости от роста газона и типа участка. Вам не нужно ничего контролировать — просто наслаждайтесь ухоженным садом.",
+        contactEyebrow: "Не тратьте время на газонокосилку",
+        contactTitle: "Закажите стрижку газона уже сегодня",
+        contactText: "Напишите нам, и мы подготовим предложение с учетом размера участка, состояния газона и локации. Без обязательств, быстро, понятно и по хорошей цене.",
+        formTitle: "Запросите предложение без обязательств",
+        formIntro: "Заполните короткую форму, и мы свяжемся с вами как можно скорее.",
+        successMessage: "Спасибо за вашу заявку. Мы получили ваше сообщение и свяжемся с вами как можно скорее.",
+        errorMessage: "Не удалось отправить форму. Пожалуйста, попробуйте снова.",
+        labelFirstName: "Имя",
+        labelLastName: "Фамилия",
+        labelPhone: "Телефон",
+        labelEmail: "E-mail",
+        labelLocation: "Локация",
+        labelArea: "Примерный размер участка в м²",
+        labelMessage: "Ваше сообщение",
+        submitBtn: "Отправить заявку",
+        formNote: "Форма подключена к e-mail через Web3Forms. Для запуска вставьте свой access key.",
+        footer1: "© 2026 Стрижка газонов Брно. Все права защищены.",
+        footer2: "Профессиональный уход за зелеными территориями в Брно и окрестностях.",
+        themeLight: "☀️ Светлая тема",
+        themeDark: "🌙 Тёмная тема",
+        phFirstName: "Напр. Иван",
+        phLastName: "Напр. Иванов",
+        phPhone: "+420 123 456 789",
+        phEmail: "your@email.com",
+        phLocation: "Напр. Brno-Žabovřesky",
+        phArea: "Напр. 450",
+        phMessage: "Опишите участок, удобный срок или любую дополнительную информацию..."
+      },
+      pl: {
+        pageTitle: "Koszenie trawników w Brnie i okolicy",
+        metaDescription: "Profesjonalne koszenie trawników w Brnie i okolicy. Dobra cena, szybki kontakt, regularna pielęgnacja i jednorazowe koszenie.",
+        brand: "Koszenie trawników Brno",
+        badge: "Koszenie trawników • Brno i okolice",
+        heroTitle: "Perfekcyjnie skoszony trawnik bez problemów.",
+        heroLead: "Profesjonalne koszenie trawnika dla domów, firm i działek w Brnie i okolicy. Szybki kontakt, pewny termin i efekt, który od razu widać.",
+        slogan: "Wasza trawa, nasza radość!",
+        ctaPrimary: "Wyślij zapytanie",
+        ctaSecondary: "Zadzwoń teraz",
+        stat1: "szybka reakcja na zapytanie",
+        statPriceStrong: "Dobra cena",
+        stat2: "uczciwa oferta bez zbędnych dopłat",
+        stat3: "miasto i okoliczne miejscowości",
+        whyUs: "Dlaczego my",
+        heroCardTitle: "Trawnik, który robi świetne pierwsze wrażenie",
+        heroCardText: "Niezależnie od tego, czy potrzebujesz jednorazowego uporządkowania zarośniętej działki, czy długoterminowej pielęgnacji — zapewnimy czysty i profesjonalny efekt w dobrej cenie.",
+        benefit1: "Działamy w Brnie i szerokiej okolicy",
+        benefit2: "Szybki kontakt i uczciwa cena z góry",
+        benefit3: "Własny sprzęt do małych i większych działek",
+        benefit4: "Pewne terminy bez zbędnego czekania",
+        servicesEyebrow: "Nasze usługi",
+        servicesTitle: "Zadbamy o każdy rodzaj trawnika",
+        servicesText: "Od małych ogrodów po większe działki. Pracujemy dokładnie, sprawnie i z naciskiem na schludny wygląd całej przestrzeni w dobrej cenie.",
+        service1Title: "Regularne koszenie",
+        service1Text: "Utrzymujemy trawnik krótki, gęsty i zadbany przez cały sezon. Idealne dla domów, firm i wspólnot mieszkaniowych.",
+        service2Title: "Jednorazowa usługa",
+        service2Text: "Zarośnięty ogród, domek po zimie lub działka przed sprzedażą? Przyjedziemy szybko i doprowadzimy wszystko do porządku.",
+        service3Title: "Wykończenie detali",
+        service3Text: "Docinanie przy krawężnikach, drzewach, ogrodzeniach i chodnikach dla naprawdę profesjonalnego efektu bez kompromisów.",
+        howEyebrow: "Jak to działa",
+        howTitle: "Prosto, szybko i bez komplikacji",
+        step1Title: "Kontaktujesz się z nami",
+        step1Text: "Wyślij krótkie zapytanie lub zadzwoń. Wystarczy lokalizacja, przybliżona wielkość działki i dogodny termin.",
+        step2Title: "Proponujemy rozwiązanie",
+        step2Text: "Doradzimy odpowiednie rozwiązanie, ustalimy zakres prac i przygotujemy niezobowiązującą wycenę.",
+        step3Title: "Kosimy i sprzątamy",
+        step3Text: "Przyjeżdżamy o ustalonej porze, wykonujemy pracę dokładnie i zostawiamy po sobie porządek.",
+        whereEyebrow: "Gdzie pracujemy",
+        whereTitle: "Brno i okoliczne miasta oraz miejscowości",
+        whereText: "Najczęściej pracujemy w Brnie i okolicy. Po uzgodnieniu dojeżdżamy także dalej w obrębie kraju południowomorawskiego.",
+        maintenanceTitle: "Potrzebujesz regularnej pielęgnacji?",
+        maintenanceText: "Ustalimy częstotliwość koszenia według wzrostu trawy i rodzaju działki. Nie musisz niczego pilnować — po prostu ciesz się zadbanym ogrodem.",
+        contactEyebrow: "Nie trać czasu z kosiarką",
+        contactTitle: "Zamów koszenie trawnika już dziś",
+        contactText: "Napisz do nas, a przygotujemy ofertę według wielkości działki, stanu trawnika i lokalizacji. Bez zobowiązań, jasno, szybko i w dobrej cenie.",
+        formTitle: "Poproś o niezobowiązującą ofertę",
+        formIntro: "Wypełnij krótki formularz, a odezwiemy się do Ciebie tak szybko, jak to możliwe.",
+        successMessage: "Dziękujemy za zapytanie. Otrzymaliśmy Twoją wiadomość i odezwiemy się tak szybko, jak to możliwe.",
+        errorMessage: "Nie udało się wysłać formularza. Spróbuj ponownie.",
+        labelFirstName: "Imię",
+        labelLastName: "Nazwisko",
+        labelPhone: "Telefon",
+        labelEmail: "E-mail",
+        labelLocation: "Lokalizacja",
+        labelArea: "Przybliżona wielkość działki w m²",
+        labelMessage: "Własna wiadomość",
+        submitBtn: "Wyślij zapytanie",
+        formNote: "Formularz jest podłączony do e-maila przez Web3Forms. Aby go uruchomić, wstaw własny access key.",
+        footer1: "© 2026 Koszenie trawników Brno. Wszelkie prawa zastrzeżone.",
+        footer2: "Profesjonalna pielęgnacja terenów zielonych w Brnie i okolicy.",
+        themeLight: "☀️ Tryb jasny",
+        themeDark: "🌙 Tryb ciemny",
+        phFirstName: "Np. Jan",
+        phLastName: "Np. Kowalski",
+        phPhone: "+420 123 456 789",
+        phEmail: "twoj@email.pl",
+        phLocation: "Np. Brno-Žabovřesky",
+        phArea: "Np. 450",
+        phMessage: "Opisz działkę, dogodny termin lub inne informacje..."
+      }
+    };
+
+    const languageSelect = document.getElementById('languageSelect');
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const successBox = document.getElementById('successBox');
+    const errorBox = document.getElementById('errorBox');
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function getSystemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      const lang = localStorage.getItem('lang') || 'cs';
+      const t = translations[lang] || translations.cs;
+      themeToggle.textContent = theme === 'dark' ? t.themeLight : t.themeDark;
+    }
+
+    function initTheme() {
+      const saved = localStorage.getItem('theme');
+      const theme = saved || getSystemTheme();
+      applyTheme(theme);
+    }
+
+    function applyLanguage(lang) {
+      const t = translations[lang] || translations.cs;
+      document.documentElement.lang = lang;
+      document.title = t.pageTitle;
+      document.querySelector('meta[name="description"]').setAttribute('content', t.metaDescription);
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+
+      document.getElementById('jmeno').placeholder = t.phFirstName;
+      document.getElementById('prijmeni').placeholder = t.phLastName;
+      document.getElementById('telefon').placeholder = t.phPhone;
+      document.getElementById('email').placeholder = t.phEmail;
+      document.getElementById('lokalita').placeholder = t.phLocation;
+      document.getElementById('velikost').placeholder = t.phArea;
+      document.getElementById('zprava').placeholder = t.phMessage;
+
+      const currentTheme = root.getAttribute('data-theme') || 'light';
+      themeToggle.textContent = currentTheme === 'dark' ? t.themeLight : t.themeDark;
+
+      localStorage.setItem('lang', lang);
+      languageSelect.value = lang;
+    }
+
+    function initLanguage() {
+      const savedLang = localStorage.getItem('lang') || 'cs';
+      applyLanguage(savedLang);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'light';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    languageSelect.addEventListener('change', (e) => {
+      applyLanguage(e.target.value);
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      const saved = localStorage.getItem('theme');
+      if (!saved) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      successBox.classList.remove('show');
+      errorBox.classList.remove('show');
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          successBox.classList.add('show');
+          form.reset();
+          document.getElementById('kontakt').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          errorBox.classList.add('show');
+        }
+      } catch (error) {
+        errorBox.classList.add('show');
+      } finally {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }
+    });
+
+    initTheme();
+    initLanguage();
+  </script>
+</body>
+</html>
