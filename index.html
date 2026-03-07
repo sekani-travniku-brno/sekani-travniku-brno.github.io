@@ -650,6 +650,147 @@
       pointer-events: none;
     }
 
+
+    .calc-wrap {
+      margin-top: 28px;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: start;
+    }
+
+    .calc-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .calc-slider-wrap {
+      margin-top: 18px;
+    }
+
+    .calc-range {
+      width: 100%;
+      accent-color: var(--green);
+      cursor: pointer;
+    }
+
+    .calc-topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .calc-meter {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: var(--green-soft);
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .calc-meter strong {
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .calc-meter input::-webkit-outer-spin-button,
+    .calc-meter input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .calc-meter input[type=number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    .calc-presets {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .calc-chip {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .calc-chip:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--green) 35%, var(--border));
+    }
+
+    .calc-options {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .calc-option {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--surface-2);
+      cursor: pointer;
+      transition: border-color .2s ease, transform .2s ease, background .2s ease;
+    }
+
+    .calc-option:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--green) 40%, var(--border));
+    }
+
+    .calc-option input {
+      margin-top: 2px;
+      accent-color: var(--green);
+    }
+
+    .calc-summary {
+      display: grid;
+      gap: 12px;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+
+    .calc-row.total {
+      background: linear-gradient(135deg, rgba(21,115,71,0.12), rgba(124,207,76,0.14));
+      border-color: color-mix(in srgb, var(--green) 30%, var(--border));
+      font-weight: 800;
+    }
+
+    .calc-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 26px 0 40px;
@@ -1293,6 +1434,86 @@
       </div>
     </section>
 
+
+    <section class="soft">
+      <div class="container">
+        <div class="section-title reveal">
+          <div class="eyebrow" data-i18n="calcEyebrow">Kalkulačka ceny</div>
+          <h2 data-i18n="calcTitle">Spočítejte si orientační cenu sekání</h2>
+          <p data-i18n="calcText">Posuňte velikost pozemku, vyberte typ sekání a hned uvidíte orientační cenu podle našeho ceníku.</p>
+        </div>
+
+        <div class="calc-wrap">
+          <div class="calc-card reveal">
+            <div class="calc-topline">
+              <div>
+                <h3 data-i18n="calcAreaTitle">Velikost pozemku</h3>
+                <p class="calc-note" style="margin:0;" data-i18n="calcAreaText">Zadejte přibližnou plochu v m².</p>
+              </div>
+              <label class="calc-meter" for="calcAreaInput" style="cursor:text;">
+                <input id="calcAreaInput" type="number" min="1" max="99999" step="1" value="250" aria-label="Velikost pozemku v metrech čtverečních" style="width:120px;border:0;background:transparent;color:inherit;font:inherit;font-size:1.35rem;font-weight:800;line-height:1;outline:none;padding:0;" />
+                <span>m²</span>
+              </label>
+            </div>
+
+            <div class="calc-slider-wrap">
+              <input id="calcRange" class="calc-range" type="range" min="1" max="5000" step="1" value="250" />
+            </div>
+
+            <div class="calc-presets">
+              <button class="calc-chip" type="button" data-area="100">100 m²</button>
+              <button class="calc-chip" type="button" data-area="250">250 m²</button>
+              <button class="calc-chip" type="button" data-area="500">500 m²</button>
+              <button class="calc-chip" type="button" data-area="1000">1000 m²</button>
+            </div>
+
+            <div class="calc-options">
+              <label class="calc-option">
+                <input type="radio" name="calcType" value="2.5" checked />
+                <span>
+                  <strong data-i18n="calcOptionBasic">Sečení trávy</strong><br />
+                  <span data-i18n="calcOptionBasicDesc">Standardní sekání za 2.5 Kč / m²</span>
+                </span>
+              </label>
+
+              <label class="calc-option">
+                <input type="radio" name="calcType" value="3" />
+                <span>
+                  <strong data-i18n="calcOptionHard">Ztížené podmínky pro sekání</strong><br />
+                  <span data-i18n="calcOptionHardDesc">Náročnější terén nebo horší podmínky za 3 Kč / m²</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="calc-card reveal reveal-delay-2">
+            <h3 data-i18n="calcSummaryTitle">Orientační výpočet</h3>
+
+            <div class="calc-summary">
+              <div class="calc-row">
+                <span data-i18n="calcSummaryArea">Plocha</span>
+                <strong><span id="calcSummaryArea">250</span> m²</strong>
+              </div>
+              <div class="calc-row">
+                <span data-i18n="calcSummaryRate">Sazba</span>
+                <strong><span id="calcSummaryRate">2.5</span> Kč / m²</strong>
+              </div>
+              <div class="calc-row">
+                <span data-i18n="calcSummaryTransport">Doprava</span>
+                <strong>0 Kč</strong>
+              </div>
+              <div class="calc-row total">
+                <span data-i18n="calcSummaryTotal">Cena celkem</span>
+                <strong><span id="calcSummaryTotal">625</span> Kč</strong>
+              </div>
+            </div>
+
+            <p class="calc-note" data-i18n="calcSummaryNote">Jde o orientační kalkulaci podle ceníku. Přesnou cenu potvrdíme podle stavu pozemku a rozsahu prací.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="cta">
       <div class="container">
         <div class="cta-box reveal">
@@ -1489,6 +1710,23 @@
         modalCallBtn: "Zavolat",
         modalEmailBtn: "Napsat e-mail",
 footerVat: "Nejsem plátce DPH.",
+
+
+        calcEyebrow: "Kalkulačka ceny",
+        calcTitle: "Spočítejte si orientační cenu sekání",
+        calcText: "Posuňte velikost pozemku, vyberte typ sekání a hned uvidíte orientační cenu podle našeho ceníku.",
+        calcAreaTitle: "Velikost pozemku",
+        calcAreaText: "Zadejte přibližnou plochu v m².",
+        calcOptionBasic: "Sečení trávy",
+        calcOptionBasicDesc: "Standardní sekání za 2.5 Kč / m²",
+        calcOptionHard: "Ztížené podmínky pro sekání",
+        calcOptionHardDesc: "Náročnější terén nebo horší podmínky za 3 Kč / m²",
+        calcSummaryTitle: "Orientační výpočet",
+        calcSummaryArea: "Plocha",
+        calcSummaryRate: "Sazba",
+        calcSummaryTransport: "Doprava",
+        calcSummaryTotal: "Cena celkem",
+        calcSummaryNote: "Jde o orientační kalkulaci podle ceníku. Přesnou cenu potvrdíme podle stavu pozemku a rozsahu prací.",
 
         footer1: "© 2026 Sekání trávníků Brno. Všechna práva vyhrazena.",
         footer2: "Profesionální údržba zeleně pro Brno a okolí.",
@@ -2197,6 +2435,71 @@ themeToggle.addEventListener('click', () => {
         });
       }
     }
+
+
+    const calcRange = document.getElementById('calcRange');
+    const calcAreaInput = document.getElementById('calcAreaInput');
+    const calcSummaryArea = document.getElementById('calcSummaryArea');
+    const calcSummaryRate = document.getElementById('calcSummaryRate');
+    const calcSummaryTotal = document.getElementById('calcSummaryTotal');
+    const calcTypeInputs = document.querySelectorAll('input[name="calcType"]');
+    const calcPresetButtons = document.querySelectorAll('.calc-chip');
+
+    function formatCalcNumber(value) {
+      return Number(value).toLocaleString('cs-CZ');
+    }
+
+    function getSelectedRate() {
+      const checked = document.querySelector('input[name="calcType"]:checked');
+      return checked ? Number(checked.value) : 2.5;
+    }
+
+    function normalizeArea(value) {
+      let area = Number(value);
+      if (!Number.isFinite(area)) area = 1;
+      area = Math.round(area);
+      if (area < 1) area = 1;
+      if (area > 99999) area = 99999;
+      return area;
+    }
+
+    function updateCalculator(source = 'slider') {
+      const rate = getSelectedRate();
+      let area = source === 'input' ? normalizeArea(calcAreaInput.value) : normalizeArea(calcRange.value);
+
+      if (source === 'slider') {
+        calcAreaInput.value = area;
+      } else {
+        calcAreaInput.value = area;
+        calcRange.value = Math.min(area, 5000);
+      }
+
+      const total = Math.round(area * rate * 100) / 100;
+
+      calcSummaryArea.textContent = formatCalcNumber(area);
+      calcSummaryRate.textContent = rate.toLocaleString('cs-CZ');
+      calcSummaryTotal.textContent = total.toLocaleString('cs-CZ', {
+        minimumFractionDigits: total % 1 ? 2 : 0,
+        maximumFractionDigits: 2
+      });
+    }
+
+    if (calcRange && calcAreaInput) {
+      calcRange.addEventListener('input', () => updateCalculator('slider'));
+      calcAreaInput.addEventListener('input', () => updateCalculator('input'));
+      calcAreaInput.addEventListener('blur', () => updateCalculator('input'));
+      calcTypeInputs.forEach(input => input.addEventListener('change', () => updateCalculator('input')));
+      calcPresetButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const area = normalizeArea(btn.dataset.area);
+          calcRange.value = Math.min(area, 5000);
+          calcAreaInput.value = area;
+          updateCalculator('input');
+        });
+      });
+      updateCalculator('input');
+    }
+
 
     initTheme();
     initLanguage();
