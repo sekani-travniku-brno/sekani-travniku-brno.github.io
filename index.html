@@ -417,7 +417,7 @@
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 24px;
     }
 
@@ -428,6 +428,63 @@
       padding: 30px;
       box-shadow: var(--shadow);
       transition: background .25s ease, color .25s ease;
+    }
+
+    .stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+      color: #ffc107;
+    }
+
+    .star-svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .faq-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .faq-item h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .faq-item h3::before {
+      content: "?";
+      width: 24px;
+      height: 24px;
+      background: var(--green-soft);
+      color: var(--green);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .faq-item p {
+      color: var(--muted);
+      line-height: 1.6;
     }
 
     
@@ -1136,6 +1193,59 @@
       flex: 1 1 180px;
     }
 
+    /* ===== Floating phone button ===== */
+    .float-call {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 50px;
+      box-shadow: 0 6px 28px rgba(34,197,94,.45);
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      animation: float-pulse 2.6s ease-in-out infinite;
+    }
+    .float-call:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 10px 36px rgba(34,197,94,.6);
+    }
+    .float-call svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+    @keyframes float-pulse {
+      0%, 100% { box-shadow: 0 6px 28px rgba(34,197,94,.45); }
+      50% { box-shadow: 0 6px 40px rgba(34,197,94,.75); }
+    }
+    @media (max-width: 480px) {
+      .float-call .float-call-text { display: none; }
+      .float-call { padding: 16px; border-radius: 50%; bottom: 20px; right: 16px; }
+    }
+
+    /* ===== Hero phone ===== */
+    .hero-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #86efac;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .hero-phone:hover { color: #fff; }
+    .hero-phone svg { width: 18px; height: 18px; fill: currentColor; }
+
   </style>
 </head>
 <body>
@@ -1201,6 +1311,16 @@
     <symbol id="icon-check" viewBox="0 0 24 24">
       <path d="m5 12.5 4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
+    <symbol id="icon-flower" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      <path d="M12 5a3 3 0 0 0-3 3c0 2 3 5 3 5s3-3 3-5a3 3 0 0 0-3-3z" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      <path d="M12 19a3 3 0 0 0 3-3c0-2-3-5-3-5s-3 3-3 5a3 3 0 0 0 3 3z" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      <path d="M5 12a3 3 0 0 0 3 3c2 0 5-3 5-3s-3-3-5-3a3 3 0 0 0-3 3z" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      <path d="M19 12a3 3 0 0 0-3-3c-2 0-5 3-5 3s3 3 5 3a3 3 0 0 0 3-3z" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    </symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24">
+      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/>
+    </symbol>
 
   </svg>
 
@@ -1262,6 +1382,10 @@
           <a class="btn btn-primary hero-glow" href="#kontakt" data-i18n="ctaPrimary">Nezávazně poptat</a>
           <button class="btn btn-secondary" id="callNowBtn" type="button" data-i18n="ctaSecondary">Zavolat hned</button>
         </div>
+        <a class="hero-phone" href="tel:+420733454089">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+          +420 733 454 089
+        </a>
 
         <div class="stats reveal reveal-delay-4">
           <div class="stat">
@@ -1274,7 +1398,7 @@
           </div>
           <div class="stat">
             <strong>Brno+</strong>
-            <span data-i18n="stat3">město i okolní obce</span>
+            <span data-i18n="stat3">Šlapanice, Slavkov, Bučovice a okolí</span>
           </div>
         </div>
       </div>
@@ -1284,11 +1408,11 @@
           <div class="eyebrow" data-i18n="whyUs">Proč právě my</div>
           <h2 data-i18n="heroCardTitle">Trávník, který dělá skvělý první dojem</h2>
           <p data-i18n="heroCardText">
-            Ať potřebujete jednorázově upravit zarostlý pozemek, nebo hledáte dlouhodobou údržbu, postaráme se o čistý a reprezentativní výsledek za dobrou cenu.
+            Jsme dva spolehliví kluci z Brna s vlastní profi technikou. Zvládneme pravidelnou údržbu i jednorázové posekání zarostlého pozemku nebo chaty – rychle, pečlivě a za dobrou cenu.
           </p>
 
           <div class="hero-list">
-            <div class="hero-list-item"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg></span><span data-i18n="benefit1">Působíme v Brně a širokém okolí</span></div>
+            <div class="hero-list-item"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg></span><span data-i18n="benefit1">Brno, Šlapanice, Modřice, Slavkov u Brna, Bučovice a okolí</span></div>
             <div class="hero-list-item"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg></span><span data-i18n="benefit2">Rychlá domluva a férová cena předem</span></div>
             <div class="hero-list-item"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg></span><span data-i18n="benefit3">Vlastní technika pro malé i větší pozemky</span></div>
             <div class="hero-list-item"><span class="icon-inline" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg></span><span data-i18n="benefit4">Spolehlivé termíny bez zbytečného čekání</span></div>
@@ -1326,6 +1450,12 @@
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-check-circle"></use></svg></div>
             <h3 data-i18n="service3Title">Dosekání detailů</h3>
             <p data-i18n="service3Text">Začištění kolem obrubníků, stromů, plotů a chodníků pro opravdu profesionální výsledek bez kompromisů.</p>
+          </article>
+
+          <article class="card tilt-card reveal">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-flower"></use></svg></div>
+            <h3 data-i18n="service4Title">Příplatková údržba</h3>
+            <p data-i18n="service4Text">Komplexní péče o zahradu mimo sekání – vytrhávání plevele ze záhonů a dlažby, stříhání živých plotů a odplevelení.</p>
           </article>
         </div>
       </div>
@@ -1376,6 +1506,8 @@
             <span class="chip">Brno-venkov</span>
             <span class="chip">Šlapanice</span>
             <span class="chip">Modřice</span>
+            <span class="chip">Slavkov u Brna</span>
+            <span class="chip">Bučovice</span>
           </div>
 
           <div class="mini-panel reveal reveal-delay-3">
@@ -1516,6 +1648,95 @@
       </div>
     </section>
 
+    <section id="recenze">
+      <div class="container">
+        <div class="section-title reveal">
+          <div class="eyebrow" data-i18n="reviewsEyebrow">Reference</div>
+          <h2 data-i18n="reviewsTitle">Co o nás říkají naši spokojení klienti</h2>
+          <p data-i18n="reviewsText">Zákaznická spokojenost a poctivá práce jsou naším hlavním cílem. Zde jsou hodnocení našich reálných zákazníků.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card reveal">
+            <div class="stars">
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+            </div>
+            <p style="font-style: italic; margin-bottom: 20px;" data-i18n="review1Text">Pánové přijeli přesně v domluvený čas, zahradu posekali velmi rychle a pečlivě začištěné byly i rohy u plotu. Cena odpovídala orientační kalkulačce na webu. Všem doporučuji!</p>
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <strong data-i18n="review1Author">Martin K.</strong>
+              <span style="color: var(--muted); font-size: 0.9rem;" data-i18n="review1Meta">Brno-Líšeň</span>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="stars">
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+            </div>
+            <p style="font-style: italic; margin-bottom: 20px;" data-i18n="review2Text">Objednala jsem sekání zahrady u chaty, přijeli včas, odvedli skvělou práci a vše uklidili. Cena odpovídala kalkulačce na webu. Super kluci, určitě využiji znovu!</p>
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <strong data-i18n="review2Author">Jana S.</strong>
+              <span style="color: var(--muted); font-size: 0.9rem;" data-i18n="review2Meta">Šlapanice</span>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="stars">
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+              <svg class="star-svg"><use href="#icon-star"></use></svg>
+            </div>
+            <p style="font-style: italic; margin-bottom: 20px;" data-i18n="review3Text">Potřeboval jsem jednorázově zlikvidovat vysoký porost a vyčistit zarostlou příjezdovou cestu od plevele. Přijeli s profi technikou, za odpoledne bylo hotovo a odpad odvezli. Skvělá a férová práce.</p>
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <strong data-i18n="review3Author">Petr D.</strong>
+              <span style="color: var(--muted); font-size: 0.9rem;" data-i18n="review3Meta">Slavkov u Brna</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft" id="faq">
+      <div class="container">
+        <div class="section-title reveal">
+          <div class="eyebrow" data-i18n="faqEyebrow">Časté dotazy</div>
+          <h2 data-i18n="faqTitle">Odpovědi na to, co vás nejčastěji zajímá</h2>
+          <p data-i18n="faqText">Chcete se dozvědět více o průběhu sekání, nacenění nebo doplňkových službách? Zde jsou odpovědi.</p>
+        </div>
+
+        <div class="faq-list">
+          <article class="faq-item reveal">
+            <h3 data-i18n="faq1Question">Jak se počítá cena?</h3>
+            <p data-i18n="faq1Answer">Základní cena je 2,5 Kč / m² za běžné sekání. Přesnou cenu vám potvrdíme na základě stavu pozemku a výšky trávy ještě před zahájením prací. Žádné skryté poplatky neúčtujeme.</p>
+          </article>
+
+          <article class="faq-item reveal">
+            <h3 data-i18n="faq2Question">Co všechno spadá pod příplatkovou údržbu?</h3>
+            <p data-i18n="faq2Answer">Patří sem vytrhávání plevele ze záhonů a spár v dlažbě, prořezávání křovin, hrabání listí, čištění venkovních ploch nebo drobné zahradní práce. Vše závisí na vaší individuální domluvě.</p>
+          </article>
+
+          <article class="faq-item reveal">
+            <h3 data-i18n="faq3Question">Odvážíte posekanou trávu a plevel?</h3>
+            <p data-i18n="faq3Answer">Ano, po domluvě zajistíme kompletní shrabání, naložení a ekologickou likvidaci posekané trávy i vytrhaného plevele, takže vaše zahrada zůstane dokonale čistá.</p>
+          </article>
+
+          <article class="faq-item reveal">
+            <h3 data-i18n="faq4Question">Co se stane v případě nepříznivého počasí?</h3>
+            <p data-i18n="faq4Answer">Pokud bude pršet, domluvíme se s vámi na nejbližším možném náhradním termínu, který vám bude vyhovovat.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="cta">
       <div class="container">
         <div class="cta-box reveal">
@@ -1603,9 +1824,9 @@
       <h3 id="contactModalTitle" class="contact-modal-title" data-i18n="modalTitle">Ozvěte se nám</h3>
       <p class="contact-modal-text" data-i18n="modalText">Vyberte si, jestli chcete zavolat nebo napsat e-mail.</p>
       <div class="contact-modal-list">
-        <a class="contact-modal-item" href="tel:">
+        <a class="contact-modal-item" href="tel:+420733454089">
           <strong data-i18n="modalPhoneLabel">Telefon</strong>
-          <span></span>
+          <span>+420 733 454 089</span>
         </a>
         <a class="contact-modal-item" href="mailto:sekanitravnikubrno@gmail.com">
           <strong data-i18n="modalEmailLabel">E-mail</strong>
@@ -1613,18 +1834,25 @@
         </a>
       </div>
       <div class="contact-modal-actions">
-        <a class="btn btn-primary" href="tel:" data-i18n="modalCallBtn">Zavolat</a>
+        <a class="btn btn-primary" href="tel:+420733454089" data-i18n="modalCallBtn">Zavolat</a>
         <a class="btn btn-secondary" href="mailto:sekanitravnikubrno@gmail.com" data-i18n="modalEmailBtn">Napsat e-mail</a>
       </div>
     </div>
   </div>
 
 
+  <!-- Floating call button -->
+  <a class="float-call" href="tel:+420733454089" aria-label="Zavolat">
+    <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+    <span class="float-call-text">+420 733 454 089</span>
+  </a>
+
+
   <footer>
     <div class="container footer-inner">
       <div>
         <div data-i18n="footer1">© 2026 Sekání trávníků Brno. Všechna práva vyhrazena.</div>
-        <div data-i18n="footerVat">Nejsem plátce DPH.</div>
+        <div data-i18n="footerVat">Nejsme plátci DPH.</div>
       </div>
       <div data-i18n="footer2">Profesionální údržba zeleně pro Brno a okolí.</div>
     </div>
@@ -1645,11 +1873,11 @@
         stat1: "rychlá reakce na poptávku",
         statPriceStrong: "Dobrá cena",
         stat2: "férová nabídka bez zbytečných příplatků",
-        stat3: "město i okolní obce",
+        stat3: "Šlapanice, Slavkov, Bučovice a okolí",
         whyUs: "Proč právě my",
         heroCardTitle: "Trávník, který dělá skvělý první dojem",
-        heroCardText: "Ať potřebujete jednorázově upravit zarostlý pozemek, nebo hledáte dlouhodobou údržbu, postaráme se o čistý a reprezentativní výsledek za dobrou cenu.",
-        benefit1: "Působíme v Brně a širokém okolí",
+        heroCardText: "Jsme dva spolehliví kluci z Brna s vlastní profi technikou. Zvládneme pravidelnou údržbu i jednorázové posekání zarostlého pozemku nebo chaty – rychle, pečlivě a za dobrou cenu.",
+        benefit1: "Brno, Šlapanice, Modřice, Slavkov u Brna, Bučovice a okolí",
         benefit2: "Rychlá domluva a férová cena předem",
         benefit3: "Vlastní technika pro malé i větší pozemky",
         benefit4: "Spolehlivé termíny bez zbytečného čekání",
@@ -1711,7 +1939,7 @@
         modalEmailLabel: "E-mail",
         modalCallBtn: "Zavolat",
         modalEmailBtn: "Napsat e-mail",
-footerVat: "Nejsem plátce DPH.",
+footerVat: "Nejsme plátci DPH.",
 
 
         calcEyebrow: "Kalkulačka ceny",
@@ -1727,6 +1955,8 @@ footerVat: "Nejsem plátce DPH.",
         calcSummaryArea: "Plocha",
         calcSummaryRate: "Sazba",
         calcSummaryTransport: "Doprava",
+        calcSummaryNoFees: "Skryté poplatky",
+        calcSummaryNoFeesValue: "0 Kč (žádné)",
         calcSummaryTotal: "Cena celkem",
         calcSummaryNote: "Jde o orientační kalkulaci podle ceníku. Přesnou cenu potvrdíme podle stavu pozemku a rozsahu prací.",
 
@@ -1740,7 +1970,34 @@ footerVat: "Nejsem plátce DPH.",
         phEmail: "vas@email.cz",
         phLocation: "Např. Brno-Žabovřesky",
         phArea: "Např. 450",
-        phMessage: "Napište stav pozemku, termín nebo další informace..."
+        phMessage: "Napište stav pozemku, termín nebo další informace...",
+        service4Title: "Příplatková údržba",
+        service4Text: "Komplexní péče o zahradu mimo sekání – vytrhávání plevele ze záhonů a dlažby, stříhání živých plotů a odplevelení.",
+        price4Title: "Příplatková údržba",
+        price4Value: "od 350 Kč / hod",
+        reviewsEyebrow: "Reference",
+        reviewsTitle: "Co o nás říkají naši spokojení klienti",
+        reviewsText: "Zákaznická spokojenost a poctivá práce jsou naším hlavním cílem. Zde jsou hodnocení našich reálných zákazníků.",
+        review1Text: "Pánové přijeli přesně v domluvený čas, zahradu posekali velmi rychle a pečlivě začištěné byly i rohy u plotu. Cena odpovídala orientační kalkulačce na webu. Všem doporučuji!",
+        review1Author: "Martin K.",
+        review1Meta: "Brno-Líšeň",
+        review2Text: "Objednala jsem sekání zahrady u chaty, přijeli včas, odvedli skvělou práci a vše uklidili. Cena odpovídala kalkulačce na webu. Super kluci, určitě využiji znovu!",
+        review2Author: "Jana S.",
+        review2Meta: "Šlapanice",
+        review3Text: "Potřeboval jsem jednorázově zlikvidovat vysoký porost a vyčistit zarostlou příjezdovou cestu od plevele. Přijeli s profi technikou, za odpoledne bylo hotovo a odpad odvezli. Skvělá a férová práce.",
+        review3Author: "Petr D.",
+        review3Meta: "Slavkov u Brna",
+        faqEyebrow: "Časté dotazy",
+        faqTitle: "Odpovědi na to, co vás nejčastěji zajímá",
+        faqText: "Chcete se dozvědět více o průběhu sekání, nacenění nebo doplňkových službách? Zde jsou odpovědi.",
+        faq1Question: "Jak se počítá cena?",
+        faq1Answer: "Základní cena je 2,5 Kč / m² za běžné sekání. Přesnou cenu vám potvrdíme na základě stavu pozemku a výšky trávy ještě před zahájením prací. Žádné skryté poplatky neúčtujeme.",
+        faq2Question: "Co všechno spadá pod příplatkovou údržbu?",
+        faq2Answer: "Patří sem vytrhávání plevele ze záhonů a spár v dlažbě, prořezávání křovin, čištění venkovních ploch nebo drobné zahradní práce. Vše závisí na vaší individuální domluvě.",
+        faq3Question: "Odvážíte posekanou trávu a plevel?",
+        faq3Answer: "Ano, po domluvě zajistíme kompletní shrabání, naložení a ekologickou likvidaci posekané trávy i vytrhaného plevele, takže vaše zahrada zůstane dokonale čistá.",
+        faq4Question: "Co se stane v případě nepříznivého počasí?",
+        faq4Answer: "Pokud bude pršet, domluvíme se s vámi na nejbližším možném náhradním termínu, který vám bude vyhovovat."
       },
       sk: {
         pageTitle: "Kosenie trávnikov Brno a okolie",
@@ -1755,11 +2012,11 @@ footerVat: "Nejsem plátce DPH.",
         stat1: "rýchla reakcia na dopyt",
         statPriceStrong: "Dobrá cena",
         stat2: "férová ponuka bez zbytočných príplatkov",
-        stat3: "mesto aj okolité obce",
+        stat3: "Šlapanice, Slavkov, Bučovice a okolie",
         whyUs: "Prečo práve my",
         heroCardTitle: "Trávnik, ktorý robí skvelý prvý dojem",
-        heroCardText: "Či už potrebujete jednorazovo upraviť zarastený pozemok, alebo hľadáte dlhodobú údržbu, postaráme sa o čistý a reprezentatívny výsledok za dobrú cenu.",
-        benefit1: "Pôsobíme v Brne a širokom okolí",
+        heroCardText: "Sme dvaja spoľahliví chlapci z Brna s vlastnou profi technikou. Zvládneme pravidelnú údržbu aj jednorazové pokosenie zarasteného pozemku alebo chaty – rýchlo, starostlivo a za dobrú cenu.",
+        benefit1: "Brno, Šlapanice, Modřice, Slavkov u Brna, Bučovice a okolie",
         benefit2: "Rýchla dohoda a férová cena vopred",
         benefit3: "Vlastná technika pre malé aj väčšie pozemky",
         benefit4: "Spoľahlivé termíny bez zbytočného čakania",
@@ -1814,6 +2071,8 @@ footerVat: "Nejsem plátce DPH.",
         minPaymentValue: "NEOBMEDZENE",
         transportTitle: "Doprava na miesto",
         transportValue: "0 Kč",
+        calcSummaryNoFees: "Skryté poplatky",
+        calcSummaryNoFeesValue: "0 Kč (žiadne)",
                 modalEyebrow: "Kontakt",
         modalTitle: "Ozvite sa nám",
         modalText: "Vyberte si, či chcete zavolať alebo napísať e-mail.",
@@ -1821,7 +2080,7 @@ footerVat: "Nejsem plátce DPH.",
         modalEmailLabel: "E-mail",
         modalCallBtn: "Zavolať",
         modalEmailBtn: "Napísať e-mail",
-footerVat: "Nie som platca DPH.",
+footerVat: "Nie sme platci DPH.",
 
         footer1: "© 2026 Kosenie trávnikov Brno. Všetky práva vyhradené.",
         footer2: "Profesionálna údržba zelene pre Brno a okolie.",
@@ -1833,7 +2092,34 @@ footerVat: "Nie som platca DPH.",
         phEmail: "vas@email.sk",
         phLocation: "Napr. Brno-Žabovřesky",
         phArea: "Napr. 450",
-        phMessage: "Napíšte stav pozemku, termín alebo ďalšie informácie..."
+        phMessage: "Napíšte stav pozemku, termín alebo ďalšie informácie...",
+        service4Title: "Príplatková údržba",
+        service4Text: "Komplexná starostlivosť o záhradu mimo kosenia – vytrhávanie buriny zo záhonov a dlažby, strihanie živých plotov a odburinenie.",
+        price4Title: "Príplatková údržba",
+        price4Value: "od 350 Kč / hod",
+        reviewsEyebrow: "Referencie",
+        reviewsTitle: "Čo o nás hovoria naši spokojní klienti",
+        reviewsText: "Zákaznícka spokojnosť a poctivá práca sú naším hlavním cieľom. Tu sú hodnotenia našich reálnych zákazníkov.",
+        review1Text: "Páni prišli presne v dohodnutom čase, záhradu pokosili veľmi rýchlo a starostlivo začistené boli aj rohy pri plote. Cena zodpovedala orientační kalkulačke na webe. Všetkým odporúčam!",
+        review1Author: "Martin K.",
+        review1Meta: "Brno-Líšeň",
+        review2Text: "Objednala som kosenie záhrady pri chate, prišli včas, odviedli skvelú prácu a všetko upratali. Cena zodpovedala kalkulačke na webe. Super chlapci, určite využijem znovu!",
+        review2Author: "Jana S.",
+        review2Meta: "Šlapanice",
+        review3Text: "Potreboval som jednorazovo zlikvidovať vysoký porast a vyčistiť zarastenú príjazdovú cestu od buriny. Prišli s profi technikou, za popoludnie bolo hotovo a odpad odviezli. Skvelá a férová práca.",
+        review3Author: "Petr D.",
+        review3Meta: "Slavkov u Brna",
+        faqEyebrow: "Časté otázky",
+        faqTitle: "Odpovede na to, čo vás najčastejšie zaujíma",
+        faqText: "Chcete sa dozvedieť viac o priebehu kosenia, nacenení alebo doplnkových službách? Tu sú odpovede.",
+        faq1Question: "Ako sa počíta cena?",
+        faq1Answer: "Základná cena je 2,5 Kč / m² za bežné kosenie. Presnú cenu vám potvrdíme na základe stavu pozemku a výšky trávy ešte pred začatím prác. Žiadne skryté poplatky neúčtujeme.",
+        faq2Question: "Čo všetko spadá pod príplatkovú údržbu?",
+        faq2Answer: "Patrí sem vytrhávanie buriny zo záhonov a škár v dlažbe, prerezávanie krovín, čistenie vonkajších plôch alebo drobné záhradné práce. Všetko závisí od vašej individuálnej dohody.",
+        faq3Question: "Odvážate pokosenú trávu a burinu?",
+        faq3Answer: "Áno, po dohode zaistíme kompletné zhrabanie, naložení a ekologickú likvidáciu pokosenej trávy aj vytrhanej buriny, takže vaša záhrada zostane dokonale čistá.",
+        faq4Question: "Čo sa stane v případě nepriaznivého počasia?",
+        faq4Answer: "Ak bude pršať, dohodneme sa s vami na najbližšom možnom náhradnom termíne, ktorý vám bude vyhovovať."
       },
       en: {
         pageTitle: "Lawn Mowing in Brno and Surroundings",
@@ -1848,11 +2134,11 @@ footerVat: "Nie som platca DPH.",
         stat1: "fast response to inquiries",
         statPriceStrong: "Great price",
         stat2: "fair offer without unnecessary extras",
-        stat3: "city and nearby towns",
+        stat3: "Šlapanice, Slavkov, Bučovice & surroundings",
         whyUs: "Why choose us",
         heroCardTitle: "A lawn that makes a great first impression",
-        heroCardText: "Whether you need a one-time cleanup of an overgrown plot or long-term maintenance, we deliver a clean and professional result at a great price.",
-        benefit1: "We operate in Brno and the wider area",
+        heroCardText: "We are two reliable guys from Brno with our own professional equipment. We handle regular maintenance as well as one-time mowing of overgrown plots or cottages – quickly, carefully, and at a great price.",
+        benefit1: "Brno, Šlapanice, Modřice, Slavkov u Brna, Bučovice & surroundings",
         benefit2: "Fast communication and fair pricing upfront",
         benefit3: "Our own equipment for small and large plots",
         benefit4: "Reliable appointments without unnecessary delays",
@@ -1907,6 +2193,8 @@ footerVat: "Nie som platca DPH.",
         minPaymentValue: "UNLIMITED",
         transportTitle: "Travel to location",
         transportValue: "0 CZK",
+        calcSummaryNoFees: "Hidden fees",
+        calcSummaryNoFeesValue: "0 CZK (none)",
                 modalEyebrow: "Contact",
         modalTitle: "Get in touch",
         modalText: "Choose whether you want to call or send an email.",
@@ -1926,7 +2214,34 @@ footerVat: "I am not a VAT payer.",
         phEmail: "your@email.com",
         phLocation: "e.g. Brno-Žabovřesky",
         phArea: "e.g. 450",
-        phMessage: "Tell us about the plot, preferred date, or any other details..."
+        phMessage: "Tell us about the plot, preferred date, or any other details...",
+        service4Title: "Extra maintenance",
+        service4Text: "Comprehensive garden care beyond mowing – weeding beds and paving, hedge trimming, and weed removal.",
+        price4Title: "Extra maintenance",
+        price4Value: "from 350 CZK / hr",
+        reviewsEyebrow: "Reviews",
+        reviewsTitle: "What our satisfied clients say about us",
+        reviewsText: "Customer satisfaction and honest work are our main goals. Here are reviews from our real customers.",
+        review1Text: "The guys arrived exactly at the agreed time, mowed the garden very quickly and carefully trimmed the corners near the fence. The price corresponded to the calculator on the website. I highly recommend them!",
+        review1Author: "Martin K.",
+        review1Meta: "Brno-Líšeň",
+        review2Text: "I ordered garden mowing at my cottage, they arrived on time, did a great job and cleaned up everything. The price matched the calculator on the website. Great guys, I will definitely use them again!",
+        review2Author: "Jana S.",
+        review2Meta: "Šlapanice",
+        review3Text: "I needed a one-time removal of overgrown grass and weeds from my driveway. They came with professional equipment, completed it in an afternoon, and took the waste. Great and honest work.",
+        review3Author: "Petr D.",
+        review3Meta: "Slavkov u Brna",
+        faqEyebrow: "FAQ",
+        faqTitle: "Answers to what you are most often interested in",
+        faqText: "Want to learn more about the mowing process, pricing, or extra services? Here are the answers.",
+        faq1Question: "How is the price calculated?",
+        faq1Answer: "The base price is 2.5 CZK / m² for standard mowing. We will confirm the exact price based on the condition of the plot and the grass height before starting work. We do not charge any hidden fees.",
+        faq2Question: "What is included in the extra maintenance?",
+        faq2Answer: "This includes weeding garden beds and paving joints, trimming shrubs, cleaning outdoor surfaces, or minor gardening tasks. Everything depends on your individual agreement.",
+        faq3Question: "Do you take away the mown grass and weeds?",
+        faq3Answer: "Yes, by agreement we will arrange the complete raking, loading, and ecological disposal of the cut grass and weeds, so your garden remains perfectly clean.",
+        faq4Question: "What happens in case of bad weather?",
+        faq4Answer: "If it rains, we will arrange a convenient alternative date with you as soon as possible."
       },
       de: {
         pageTitle: "Rasenmähen in Brünn und Umgebung",
@@ -1941,11 +2256,11 @@ footerVat: "I am not a VAT payer.",
         stat1: "schnelle Reaktion auf Anfragen",
         statPriceStrong: "Guter Preis",
         stat2: "faires Angebot ohne unnötige Zuschläge",
-        stat3: "Stadt und umliegende Gemeinden",
+        stat3: "Šlapanice, Slavkov, Bučovice und Umgebung",
         whyUs: "Warum wir",
         heroCardTitle: "Ein Rasen, der einen starken ersten Eindruck macht",
-        heroCardText: "Ob Sie ein überwachsenes Grundstück einmalig herrichten lassen möchten oder eine langfristige Pflege suchen — wir liefern ein sauberes und professionelles Ergebnis zu einem guten Preis.",
-        benefit1: "Wir arbeiten in Brünn und in der weiteren Umgebung",
+        heroCardText: "Wir sind zwei zuverlässige Jungs aus Brünn mit eigener Profi-Ausrüstung. Wir erledigen regelmäßige Pflege ebenso wie einmalige Einsätze auf verwilderten Grundstücken oder Ferienhäusern – schnell, sorgfältig und zu einem guten Preis.",
+        benefit1: "Brno, Šlapanice, Modřice, Slavkov u Brna, Bučovice und Umgebung",
         benefit2: "Schnelle Kommunikation und faire Preise im Voraus",
         benefit3: "Eigene Technik für kleine und große Grundstücke",
         benefit4: "Zuverlässige Termine ohne unnötige Wartezeiten",
@@ -2000,6 +2315,8 @@ footerVat: "I am not a VAT payer.",
         minPaymentValue: "UNBEGRENZT",
         transportTitle: "Anfahrt",
         transportValue: "0 CZK",
+        calcSummaryNoFees: "Versteckte Gebühren",
+        calcSummaryNoFeesValue: "0 CZK (keine)",
                 modalEyebrow: "Kontakt",
         modalTitle: "Melden Sie sich bei uns",
         modalText: "Wählen Sie, ob Sie anrufen oder eine E-Mail schreiben möchten.",
@@ -2019,7 +2336,34 @@ footerVat: "Ich bin kein MwSt.-Zahler.",
         phEmail: "ihre@email.de",
         phLocation: "z. B. Brno-Žabovřesky",
         phArea: "z. B. 450",
-        phMessage: "Beschreiben Sie das Grundstück, den Termin oder weitere Informationen..."
+        phMessage: "Beschreiben Sie das Grundstück, den Termin oder weitere Informationen...",
+        service4Title: "Zusatzpflege",
+        service4Text: "Umfassende Gartenpflege über das Mähen hinaus – Unkrautjäten in Beeten und Pflasterungen, Heckenschnitt und Unkrautbeseitigung.",
+        price4Title: "Zusatzpflege",
+        price4Value: "ab 350 CZK / Std",
+        reviewsEyebrow: "Bewertungen",
+        reviewsTitle: "Was unsere zufriedenen Kunden über uns sagen",
+        reviewsText: "Kundenzufriedenheit und ehrliche Arbeit sind unsere Hauptziele. Hier sind die Bewertungen unserer echten Kunden.",
+        review1Text: "Die Jungs kamen genau zur vereinbarten Zeit, mähten den Garten sehr schnell und schnitten die Ecken am Zaun sorgfältig ab. Der Preis entsprach dem Rechner auf der Website. Ich kann sie nur empfehlen!",
+        review1Author: "Martin K.",
+        review1Meta: "Brno-Líšeň",
+        review2Text: "Ich habe Rasenmähen für meinen Garten am Ferienhaus bestellt, sie kamen pünktlich, haben tolle Arbeit geleistet und alles aufgeräumt. Der Preis entsprach dem Rechner auf der Website. Tolle Jungs, ich werde sie bestimmt wieder nutzen!",
+        review2Author: "Jana S.",
+        review2Meta: "Šlapanice",
+        review3Text: "Ich brauchte eine einmalige Beseitigung von hohem Gras und Unkraut auf meiner Einfahrt. Sie kamen mit professioneller Ausrüstung, erledigten es an einem Nachmittag und nahmen den Grünschnitt mit. Tolle und ehrliche Arbeit.",
+        review3Author: "Petr D.",
+        review3Meta: "Slavkov u Brna",
+        faqEyebrow: "Häufige Fragen",
+        faqTitle: "Antworten auf das, was Sie am häufigsten interessiert",
+        faqText: "Möchten Sie mehr über den Mähvorgang, die Preise oder Zusatzleistungen erfahren? Hier sind die Antworten.",
+        faq1Question: "Wie wird der Preis berechnet?",
+        faq1Answer: "Der Grundpreis beträgt 2,5 CZK / m² für Standardmähen. Den genauen Preis bestätigen wir Ihnen basierend auf dem Zustand des Grundstücks und der Grashöhe vor Arbeitsbeginn. Wir berechnen keine versteckten Gebühren.",
+        faq2Question: "Was ist in der Zusatzpflege enthalten?",
+        faq2Answer: "Dazu gehören das Jäten von Gartenbeeten und Pflasterfugen, das Beschneiden von Sträuchern, das Reinigen von Außenflächen oder kleinere Gartenarbeiten. Alles hängt von Ihrer individuellen Vereinbarung ab.",
+        faq3Question: "Nehmen Sie das gemähte Gras und Unkraut mit?",
+        faq3Answer: "Ja, nach Absprache organisieren wir das komplette Zusammenharken, Verladen und die ökologische Entsorgung des Schnittguts und Unkrauts, sodass Ihr Garten perfekt sauber bleibt.",
+        faq4Question: "Was passiert bei schlechtem Wetter?",
+        faq4Answer: "Wenn es regnet, vereinbaren wir so schnell wie möglich einen passenden Alternativtermin mit Ihnen."
       },
       ru: {
         pageTitle: "Стрижка газонов в Брно и окрестностях",
@@ -2034,11 +2378,11 @@ footerVat: "Ich bin kein MwSt.-Zahler.",
         stat1: "быстрый ответ на заявку",
         statPriceStrong: "Хорошая цена",
         stat2: "честное предложение без лишних доплат",
-        stat3: "город и ближайшие населенные пункты",
+        stat3: "Шлапанице, Славков, Бучовице и окрестности",
         whyUs: "Почему мы",
         heroCardTitle: "Газон, который производит отличное первое впечатление",
-        heroCardText: "Нужна ли вам разовая обработка заросшего участка или долгосрочный уход — мы обеспечим чистый и профессиональный результат по хорошей цене.",
-        benefit1: "Работаем в Брно и по всей округе",
+        heroCardText: "Мы — двое надёжных ребят из Брно с собственным профессиональным оборудованием. Справимся с регулярным уходом и разовым покосом заросшего участка или дачи — быстро, аккуратно и по хорошей цене.",
+        benefit1: "Брно, Шлапанице, Модржице, Славков-у-Брна, Бучовице и окрестности",
         benefit2: "Быстрая связь и честная цена заранее",
         benefit3: "Собственная техника для маленьких и больших участков",
         benefit4: "Надежные сроки без лишнего ожидания",
@@ -2093,6 +2437,8 @@ footerVat: "Ich bin kein MwSt.-Zahler.",
         minPaymentValue: "БЕЗ ОГРАНИЧЕНИЙ",
         transportTitle: "Выезд на место",
         transportValue: "0 Kč",
+        calcSummaryNoFees: "Скрытые комиссии",
+        calcSummaryNoFeesValue: "0 Kč (нет)",
                 modalEyebrow: "Контакт",
         modalTitle: "Свяжитесь с нами",
         modalText: "Выберите, хотите ли вы позвонить или написать e-mail.",
@@ -2112,7 +2458,34 @@ footerVat: "Я не являюсь плательщиком НДС.",
         phEmail: "your@email.com",
         phLocation: "Напр. Brno-Žabovřesky",
         phArea: "Напр. 450",
-        phMessage: "Опишите участок, удобный срок или любую дополнительную информацию..."
+        phMessage: "Опишите участок, удобный срок или любую дополнительную информацию...",
+        service4Title: "Дополнительный уход",
+        service4Text: "Комплексный уход за садом помимо стрижки — прополка сорняков на клумбах и плитке, стрижка живой изгороди и удаление сорняков.",
+        price4Title: "Дополнительный уход",
+        price4Value: "от 350 крон / час",
+        reviewsEyebrow: "Отзывы",
+        reviewsTitle: "Что о нас говорят наши довольные клиенты",
+        reviewsText: "Удовлетворенность клиентов и честная работа — наша главная цель. Вот отзывы наших реальных клиентов.",
+        review1Text: "Ребята приехали точно в оговоренное время, подстригли сад очень быстро и аккуратно подровняли углы у забора. Цена соответствовала калькулятору на сайте. Всем рекомендую!",
+        review1Author: "Martin K.",
+        review1Meta: "Brno-Líšeň",
+        review2Text: "Заказала покос сада у дачи, приехали вовремя, отлично поработали и всё убрали. Цена соответствовала калькулятору на сайте. Отличные ребята, обязательно обращусь снова!",
+        review2Author: "Jana S.",
+        review2Meta: "Шлапанице",
+        review3Text: "Мне требовалось разовое удаление высокой травы и сорняков с подъездной дорожки. Они приехали с профессиональным оборудованием, закончили за полдня и вывезли отходы. Отличная и честная работа.",
+        review3Author: "Petr D.",
+        review3Meta: "Славков-у-Брна",
+        faqEyebrow: "Частые вопросы",
+        faqTitle: "Ответы на то, что вас чаще всего интересует",
+        faqText: "Хотите узнать больше о процессе покоса, ценах или дополнительных услугах? Вот ответы.",
+        faq1Question: "Как рассчитывается цена?",
+        faq1Answer: "Базовая цена составляет 2,5 кроны / м² за стандартный покос. Мы подтвердим точную цену на основе состояния участка и высоты травы до начала работ. Никаких скрытых комиссий.",
+        faq2Question: "Что входит в дополнительный уход?",
+        faq2Answer: "Сюда входит прополка клумб и швов плитки, обрезка кустарников, чистка открытых площадок или мелкие садовые работы. Все зависит от индивидуальной договоренности.",
+        faq3Question: "Вы вывозите скошенную траву и сорняки?",
+        faq3Answer: "Да, по договоренности мы организуем полный сбор, погрузку и экологическую утилизацию скошенной травы и сорняков, чтобы ваш сад оставался идеально чистым.",
+        faq4Question: "Что происходит в случае плохой погоды?",
+        faq4Answer: "Если пойдет дождь, мы согласуем с вами удобную альтернативную дату в кратчайшие сроки."
       },
       pl: {
         pageTitle: "Koszenie trawników w Brnie i okolicy",
@@ -2127,11 +2500,11 @@ footerVat: "Я не являюсь плательщиком НДС.",
         stat1: "szybka reakcja na zapytanie",
         statPriceStrong: "Dobra cena",
         stat2: "uczciwa oferta bez zbędnych dopłat",
-        stat3: "miasto i okoliczne miejscowości",
+        stat3: "Šlapanice, Slavkov, Bučovice i okolice",
         whyUs: "Dlaczego my",
         heroCardTitle: "Trawnik, który robi świetne pierwsze wrażenie",
-        heroCardText: "Niezależnie od tego, czy potrzebujesz jednorazowego uporządkowania zarośniętej działki, czy długoterminowej pielęgnacji — zapewnimy czysty i profesjonalny efekt w dobrej cenie.",
-        benefit1: "Działamy w Brnie i szerokiej okolicy",
+        heroCardText: "Jesteśmy dwoma niezawodnymi chłopakami z Brna z własnym profesjonalnym sprzętem. Poradzimy sobie z regularną pielęgnacją, jak i jednorazowym skoszeniem zarośniętej działki lub domku – szybko, starannie i w dobrej cenie.",
+        benefit1: "Brno, Šlapanice, Modřice, Slavkov u Brna, Bučovice i okolice",
         benefit2: "Szybki kontakt i uczciwa cena z góry",
         benefit3: "Własny sprzęt do małych i większych działek",
         benefit4: "Pewne terminy bez zbędnego czekania",
@@ -2186,6 +2559,8 @@ footerVat: "Я не являюсь плательщиком НДС.",
         minPaymentValue: "BEZ OGRANICZEŃ",
         transportTitle: "Dojazd na miejsce",
         transportValue: "0 Kč",
+        calcSummaryNoFees: "Ukryte opłaty",
+        calcSummaryNoFeesValue: "0 Kč (brak)",
                 modalEyebrow: "Kontakt",
         modalTitle: "Skontaktuj się z nami",
         modalText: "Wybierz, czy chcesz zadzwonić, czy napisać e-mail.",
@@ -2205,7 +2580,34 @@ footerVat: "Nie jestem płatnikiem VAT.",
         phEmail: "twoj@email.pl",
         phLocation: "Np. Brno-Žabovřesky",
         phArea: "Np. 450",
-        phMessage: "Opisz działkę, dogodny termin lub inne informacje..."
+        phMessage: "Opisz działkę, dogodny termin lub inne informacje...",
+        service4Title: "Pielęgnacja dodatkowa",
+        service4Text: "Kompleksowa pielęgnacja ogrodu poza koszeniem – pielenie rabat i kostki brukowej, przycinanie żywopłotów i odchwaszczanie.",
+        price4Title: "Pielęgnacja dodatkowa",
+        price4Value: "od 350 CZK / godz",
+        reviewsEyebrow: "Opinie",
+        reviewsTitle: "Co o nas mówią nasi zadowoleni klienci",
+        reviewsText: "Satysfakcja klienta i uczciwa praca to nasz główny cel. Oto opinie naszych realnych klientów.",
+        review1Text: "Panowie przyjechali dokładnie o umówionej godzinie, skosili ogród bardzo szybko i starannie przycięli rogi przy płocie. Cena zgadzała się z kalkulatorem na stronie. Polecam wszystkim!",
+        review1Author: "Martin K.",
+        review1Meta: "Brno-Líšeň",
+        review2Text: "Zamówiłam koszenie ogrodu przy domku, przyjechali na czas, wykonali świetną robotę i wszystko posprzątali. Cena zgadzała się z kalkulatorem na stronie. Świetni chłopaki, na pewno skorzystam ponownie!",
+        review2Author: "Jana S.",
+        review2Meta: "Šlapanice",
+        review3Text: "Potrzebowałem jednorazowego usunięcia wysokiej trawy i chwastów z mojego podjazdu. Przyjechali z profesjonalnym sprzętem, skończyli w jedno popołudnie i wywieźli odpady. Świetna i uczciwa robota.",
+        review3Author: "Petr D.",
+        review3Meta: "Slavkov u Brna",
+        faqEyebrow: "Częste pytania",
+        faqTitle: "Odpowiedzi na to, co najczęściej Cię interesuje",
+        faqText: "Chcesz dowiedzieć się więcej o procesie koszenia, cenach lub usługach dodatkowych? Oto odpowiedzi.",
+        faq1Question: "Jak obliczana jest cena?",
+        faq1Answer: "Cena podstawowa wynosi 2,5 CZK / m² za standardowe koszenie. Ostateczną cenę potwierdzimy na podstawie stanu działki i wysokości trawy przed rozpoczęciem prac. Nie naliczamy żadnych ukrytych opłat.",
+        faq2Question: "Co wchodzi w zakres pielęgnacji dodatkowej?",
+        faq2Answer: "Obejmuje to pielenie rabat ogrodowych i spoin kostki brukowej, przycinanie krzewów, czyszczenie powierzchni zewnętrznych lub drobne prace ogrodnicze. Wszystko zależy od indywidualnych ustaleń.",
+        faq3Question: "Czy wywozicie skoszoną trawę i chwasty?",
+        faq3Answer: "Tak, po uzgodnieniu zorganizujemy pełne grabienie, załadunek i ekologiczną utylizację skoszonej trawy oraz chwastów, dzięki czemu Twój ogród pozostanie idealnie czysty.",
+        faq4Question: "Co dzieje się w przypadku złej pogody?",
+        faq4Answer: "Jeśli będzie padać deszcz, uzgodnimy z Tobą dogodny alternatywny termin tak szybko, jak to możliwe."
       }
     };
 
